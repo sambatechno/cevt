@@ -1,0 +1,7 @@
+syntax = "proto3";
+
+package cevt.msg;
+
+message TestEvent {
+  string message = 1;
+}
