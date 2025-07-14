@@ -397,8 +397,9 @@ type UserEvent_OrderCompleted struct {
 	OrderNumber   string                 `protobuf:"bytes,5,opt,name=order_number,json=orderNumber,proto3" json:"order_number,omitempty"`
 	CreatedAt     string                 `protobuf:"bytes,6,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	PaymentStatus string                 `protobuf:"bytes,7,opt,name=payment_status,json=paymentStatus,proto3" json:"payment_status,omitempty"`
-	TransactionId string                 `protobuf:"bytes,8,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
-	PaidAt        string                 `protobuf:"bytes,9,opt,name=paid_at,json=paidAt,proto3" json:"paid_at,omitempty"`
+	OrderRefNo    string                 `protobuf:"bytes,8,opt,name=order_ref_no,json=orderRefNo,proto3" json:"order_ref_no,omitempty"`
+	DailyQueueNo  string                 `protobuf:"bytes,9,opt,name=daily_queue_no,json=dailyQueueNo,proto3" json:"daily_queue_no,omitempty"`
+	PaidAt        string                 `protobuf:"bytes,10,opt,name=paid_at,json=paidAt,proto3" json:"paid_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -482,9 +483,16 @@ func (x *UserEvent_OrderCompleted) GetPaymentStatus() string {
 	return ""
 }
 
-func (x *UserEvent_OrderCompleted) GetTransactionId() string {
+func (x *UserEvent_OrderCompleted) GetOrderRefNo() string {
 	if x != nil {
-		return x.TransactionId
+		return x.OrderRefNo
+	}
+	return ""
+}
+
+func (x *UserEvent_OrderCompleted) GetDailyQueueNo() string {
+	if x != nil {
+		return x.DailyQueueNo
 	}
 	return ""
 }
@@ -500,7 +508,7 @@ var File_cevt_msg_user_event_proto protoreflect.FileDescriptor
 
 const file_cevt_msg_user_event_proto_rawDesc = "" +
 	"\n" +
-	"\x19cevt/msg/user_event.proto\x12\bcevt.msg\x1a\x1acevt/msg/tenant_meta.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xa9\n" +
+	"\x19cevt/msg/user_event.proto\x12\bcevt.msg\x1a\x1acevt/msg/tenant_meta.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xca\n" +
 	"\n" +
 	"\tUserEvent\x12\x1b\n" +
 	"\tuser_uuid\x18\x1e \x01(\tR\buserUuid\x12\x17\n" +
@@ -530,7 +538,7 @@ const file_cevt_msg_user_event_proto_rawDesc = "" +
 	"\n" +
 	"expired_at\x18\x05 \x01(\tR\texpiredAt\x12%\n" +
 	"\x0egenerated_year\x18\x06 \x01(\x03R\rgeneratedYear\x12)\n" +
-	"\x10redemption_limit\x18\a \x01(\x03R\x0fredemptionLimit\x1a\xab\x02\n" +
+	"\x10redemption_limit\x18\a \x01(\x03R\x0fredemptionLimit\x1a\xcc\x02\n" +
 	"\x0eOrderCompleted\x12\x16\n" +
 	"\x06amount\x18\x01 \x01(\x01R\x06amount\x12#\n" +
 	"\rshopper_email\x18\x02 \x01(\tR\fshopperEmail\x12!\n" +
@@ -539,9 +547,12 @@ const file_cevt_msg_user_event_proto_rawDesc = "" +
 	"\forder_number\x18\x05 \x01(\tR\vorderNumber\x12\x1d\n" +
 	"\n" +
 	"created_at\x18\x06 \x01(\tR\tcreatedAt\x12%\n" +
-	"\x0epayment_status\x18\a \x01(\tR\rpaymentStatus\x12%\n" +
-	"\x0etransaction_id\x18\b \x01(\tR\rtransactionId\x12\x17\n" +
-	"\apaid_at\x18\t \x01(\tR\x06paidAtB\x06\n" +
+	"\x0epayment_status\x18\a \x01(\tR\rpaymentStatus\x12 \n" +
+	"\forder_ref_no\x18\b \x01(\tR\n" +
+	"orderRefNo\x12$\n" +
+	"\x0edaily_queue_no\x18\t \x01(\tR\fdailyQueueNo\x12\x17\n" +
+	"\apaid_at\x18\n" +
+	" \x01(\tR\x06paidAtB\x06\n" +
 	"\x04bodyB\x89\x01\n" +
 	"\fcom.cevt.msgB\x0eUserEventProtoP\x01Z(github.com/sambatechno/cevt/gen/cevt/msg\xa2\x02\x03CMX\xaa\x02\bCevt.Msg\xca\x02\bCevt\\Msg\xe2\x02\x14Cevt\\Msg\\GPBMetadata\xea\x02\tCevt::Msgb\x06proto3"
 

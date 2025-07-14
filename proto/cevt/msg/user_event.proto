@@ -44,8 +44,9 @@ message UserEvent {
     string order_number = 5;
     string created_at = 6;
     string payment_status = 7;
-    string transaction_id = 8;
-    string paid_at = 9;
+    string order_ref_no = 8;
+    string daily_queue_no = 9;
+    string paid_at = 10;
   }
 
   oneof body {
