@@ -33,6 +33,7 @@ type UserEvent struct {
 	//	*UserEvent_RegistrationSuccess_
 	//	*UserEvent_EmailVerified_
 	//	*UserEvent_VoucherCreated_
+	//	*UserEvent_OrderCompleted_
 	Body          isUserEvent_Body `protobuf_oneof:"body"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -130,6 +131,15 @@ func (x *UserEvent) GetVoucherCreated() *UserEvent_VoucherCreated {
 	return nil
 }
 
+func (x *UserEvent) GetOrderCompleted() *UserEvent_OrderCompleted {
+	if x != nil {
+		if x, ok := x.Body.(*UserEvent_OrderCompleted_); ok {
+			return x.OrderCompleted
+		}
+	}
+	return nil
+}
+
 type isUserEvent_Body interface {
 	isUserEvent_Body()
 }
@@ -146,11 +156,17 @@ type UserEvent_VoucherCreated_ struct {
 	VoucherCreated *UserEvent_VoucherCreated `protobuf:"bytes,3,opt,name=voucher_created,json=voucherCreated,proto3,oneof"`
 }
 
+type UserEvent_OrderCompleted_ struct {
+	OrderCompleted *UserEvent_OrderCompleted `protobuf:"bytes,4,opt,name=order_completed,json=orderCompleted,proto3,oneof"`
+}
+
 func (*UserEvent_RegistrationSuccess_) isUserEvent_Body() {}
 
 func (*UserEvent_EmailVerified_) isUserEvent_Body() {}
 
 func (*UserEvent_VoucherCreated_) isUserEvent_Body() {}
+
+func (*UserEvent_OrderCompleted_) isUserEvent_Body() {}
 
 type UserEvent_RegistrationSuccess struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
@@ -372,11 +388,120 @@ func (x *UserEvent_VoucherCreated) GetRedemptionLimit() int64 {
 	return 0
 }
 
+type UserEvent_OrderCompleted struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Amount        float64                `protobuf:"fixed64,1,opt,name=amount,proto3" json:"amount,omitempty"`
+	ShopperEmail  string                 `protobuf:"bytes,2,opt,name=shopper_email,json=shopperEmail,proto3" json:"shopper_email,omitempty"`
+	ShopperName   string                 `protobuf:"bytes,3,opt,name=shopper_name,json=shopperName,proto3" json:"shopper_name,omitempty"`
+	Sku           string                 `protobuf:"bytes,4,opt,name=sku,proto3" json:"sku,omitempty"`
+	OrderNumber   string                 `protobuf:"bytes,5,opt,name=order_number,json=orderNumber,proto3" json:"order_number,omitempty"`
+	CreatedAt     string                 `protobuf:"bytes,6,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	PaymentStatus string                 `protobuf:"bytes,7,opt,name=payment_status,json=paymentStatus,proto3" json:"payment_status,omitempty"`
+	TransactionId string                 `protobuf:"bytes,8,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	PaidAt        string                 `protobuf:"bytes,9,opt,name=paid_at,json=paidAt,proto3" json:"paid_at,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UserEvent_OrderCompleted) Reset() {
+	*x = UserEvent_OrderCompleted{}
+	mi := &file_cevt_msg_user_event_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UserEvent_OrderCompleted) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UserEvent_OrderCompleted) ProtoMessage() {}
+
+func (x *UserEvent_OrderCompleted) ProtoReflect() protoreflect.Message {
+	mi := &file_cevt_msg_user_event_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UserEvent_OrderCompleted.ProtoReflect.Descriptor instead.
+func (*UserEvent_OrderCompleted) Descriptor() ([]byte, []int) {
+	return file_cevt_msg_user_event_proto_rawDescGZIP(), []int{0, 3}
+}
+
+func (x *UserEvent_OrderCompleted) GetAmount() float64 {
+	if x != nil {
+		return x.Amount
+	}
+	return 0
+}
+
+func (x *UserEvent_OrderCompleted) GetShopperEmail() string {
+	if x != nil {
+		return x.ShopperEmail
+	}
+	return ""
+}
+
+func (x *UserEvent_OrderCompleted) GetShopperName() string {
+	if x != nil {
+		return x.ShopperName
+	}
+	return ""
+}
+
+func (x *UserEvent_OrderCompleted) GetSku() string {
+	if x != nil {
+		return x.Sku
+	}
+	return ""
+}
+
+func (x *UserEvent_OrderCompleted) GetOrderNumber() string {
+	if x != nil {
+		return x.OrderNumber
+	}
+	return ""
+}
+
+func (x *UserEvent_OrderCompleted) GetCreatedAt() string {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return ""
+}
+
+func (x *UserEvent_OrderCompleted) GetPaymentStatus() string {
+	if x != nil {
+		return x.PaymentStatus
+	}
+	return ""
+}
+
+func (x *UserEvent_OrderCompleted) GetTransactionId() string {
+	if x != nil {
+		return x.TransactionId
+	}
+	return ""
+}
+
+func (x *UserEvent_OrderCompleted) GetPaidAt() string {
+	if x != nil {
+		return x.PaidAt
+	}
+	return ""
+}
+
 var File_cevt_msg_user_event_proto protoreflect.FileDescriptor
 
 const file_cevt_msg_user_event_proto_rawDesc = "" +
 	"\n" +
-	"\x19cevt/msg/user_event.proto\x12\bcevt.msg\x1a\x1acevt/msg/tenant_meta.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xac\a\n" +
+	"\x19cevt/msg/user_event.proto\x12\bcevt.msg\x1a\x1acevt/msg/tenant_meta.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xa9\n" +
+	"\n" +
 	"\tUserEvent\x12\x1b\n" +
 	"\tuser_uuid\x18\x1e \x01(\tR\buserUuid\x12\x17\n" +
 	"\auser_id\x18\x1f \x01(\x03R\x06userId\x125\n" +
@@ -385,7 +510,8 @@ const file_cevt_msg_user_event_proto_rawDesc = "" +
 	"\x10create_timestamp\x18d \x01(\v2\x1a.google.protobuf.TimestampR\x0fcreateTimestamp\x12\\\n" +
 	"\x14registration_success\x18\x01 \x01(\v2'.cevt.msg.UserEvent.RegistrationSuccessH\x00R\x13registrationSuccess\x12J\n" +
 	"\x0eemail_verified\x18\x02 \x01(\v2!.cevt.msg.UserEvent.EmailVerifiedH\x00R\remailVerified\x12M\n" +
-	"\x0fvoucher_created\x18\x03 \x01(\v2\".cevt.msg.UserEvent.VoucherCreatedH\x00R\x0evoucherCreated\x1a\xcc\x01\n" +
+	"\x0fvoucher_created\x18\x03 \x01(\v2\".cevt.msg.UserEvent.VoucherCreatedH\x00R\x0evoucherCreated\x12M\n" +
+	"\x0forder_completed\x18\x04 \x01(\v2\".cevt.msg.UserEvent.OrderCompletedH\x00R\x0eorderCompleted\x1a\xcc\x01\n" +
 	"\x13RegistrationSuccess\x12\x14\n" +
 	"\x05email\x18\x01 \x01(\tR\x05email\x12%\n" +
 	"\x0eemail_verified\x18\x02 \x01(\bR\remailVerified\x12\x1d\n" +
@@ -404,7 +530,18 @@ const file_cevt_msg_user_event_proto_rawDesc = "" +
 	"\n" +
 	"expired_at\x18\x05 \x01(\tR\texpiredAt\x12%\n" +
 	"\x0egenerated_year\x18\x06 \x01(\x03R\rgeneratedYear\x12)\n" +
-	"\x10redemption_limit\x18\a \x01(\x03R\x0fredemptionLimitB\x06\n" +
+	"\x10redemption_limit\x18\a \x01(\x03R\x0fredemptionLimit\x1a\xab\x02\n" +
+	"\x0eOrderCompleted\x12\x16\n" +
+	"\x06amount\x18\x01 \x01(\x01R\x06amount\x12#\n" +
+	"\rshopper_email\x18\x02 \x01(\tR\fshopperEmail\x12!\n" +
+	"\fshopper_name\x18\x03 \x01(\tR\vshopperName\x12\x10\n" +
+	"\x03sku\x18\x04 \x01(\tR\x03sku\x12!\n" +
+	"\forder_number\x18\x05 \x01(\tR\vorderNumber\x12\x1d\n" +
+	"\n" +
+	"created_at\x18\x06 \x01(\tR\tcreatedAt\x12%\n" +
+	"\x0epayment_status\x18\a \x01(\tR\rpaymentStatus\x12%\n" +
+	"\x0etransaction_id\x18\b \x01(\tR\rtransactionId\x12\x17\n" +
+	"\apaid_at\x18\t \x01(\tR\x06paidAtB\x06\n" +
 	"\x04bodyB\x89\x01\n" +
 	"\fcom.cevt.msgB\x0eUserEventProtoP\x01Z(github.com/sambatechno/cevt/gen/cevt/msg\xa2\x02\x03CMX\xaa\x02\bCevt.Msg\xca\x02\bCevt\\Msg\xe2\x02\x14Cevt\\Msg\\GPBMetadata\xea\x02\tCevt::Msgb\x06proto3"
 
@@ -420,26 +557,28 @@ func file_cevt_msg_user_event_proto_rawDescGZIP() []byte {
 	return file_cevt_msg_user_event_proto_rawDescData
 }
 
-var file_cevt_msg_user_event_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_cevt_msg_user_event_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_cevt_msg_user_event_proto_goTypes = []any{
 	(*UserEvent)(nil),                     // 0: cevt.msg.UserEvent
 	(*UserEvent_RegistrationSuccess)(nil), // 1: cevt.msg.UserEvent.RegistrationSuccess
 	(*UserEvent_EmailVerified)(nil),       // 2: cevt.msg.UserEvent.EmailVerified
 	(*UserEvent_VoucherCreated)(nil),      // 3: cevt.msg.UserEvent.VoucherCreated
-	(*TenantMeta)(nil),                    // 4: cevt.msg.TenantMeta
-	(*timestamppb.Timestamp)(nil),         // 5: google.protobuf.Timestamp
+	(*UserEvent_OrderCompleted)(nil),      // 4: cevt.msg.UserEvent.OrderCompleted
+	(*TenantMeta)(nil),                    // 5: cevt.msg.TenantMeta
+	(*timestamppb.Timestamp)(nil),         // 6: google.protobuf.Timestamp
 }
 var file_cevt_msg_user_event_proto_depIdxs = []int32{
-	4, // 0: cevt.msg.UserEvent.tenant_meta:type_name -> cevt.msg.TenantMeta
-	5, // 1: cevt.msg.UserEvent.create_timestamp:type_name -> google.protobuf.Timestamp
+	5, // 0: cevt.msg.UserEvent.tenant_meta:type_name -> cevt.msg.TenantMeta
+	6, // 1: cevt.msg.UserEvent.create_timestamp:type_name -> google.protobuf.Timestamp
 	1, // 2: cevt.msg.UserEvent.registration_success:type_name -> cevt.msg.UserEvent.RegistrationSuccess
 	2, // 3: cevt.msg.UserEvent.email_verified:type_name -> cevt.msg.UserEvent.EmailVerified
 	3, // 4: cevt.msg.UserEvent.voucher_created:type_name -> cevt.msg.UserEvent.VoucherCreated
-	5, // [5:5] is the sub-list for method output_type
-	5, // [5:5] is the sub-list for method input_type
-	5, // [5:5] is the sub-list for extension type_name
-	5, // [5:5] is the sub-list for extension extendee
-	0, // [0:5] is the sub-list for field type_name
+	4, // 5: cevt.msg.UserEvent.order_completed:type_name -> cevt.msg.UserEvent.OrderCompleted
+	6, // [6:6] is the sub-list for method output_type
+	6, // [6:6] is the sub-list for method input_type
+	6, // [6:6] is the sub-list for extension type_name
+	6, // [6:6] is the sub-list for extension extendee
+	0, // [0:6] is the sub-list for field type_name
 }
 
 func init() { file_cevt_msg_user_event_proto_init() }
@@ -452,6 +591,7 @@ func file_cevt_msg_user_event_proto_init() {
 		(*UserEvent_RegistrationSuccess_)(nil),
 		(*UserEvent_EmailVerified_)(nil),
 		(*UserEvent_VoucherCreated_)(nil),
+		(*UserEvent_OrderCompleted_)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -459,7 +599,7 @@ func file_cevt_msg_user_event_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_cevt_msg_user_event_proto_rawDesc), len(file_cevt_msg_user_event_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   4,
+			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
