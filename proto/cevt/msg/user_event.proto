@@ -46,6 +46,7 @@ message UserEvent {
     string payment_status = 7;
     string transaction_id = 8;
     string paid_at = 9;
+    int64 transaction_count = 10;
   }
 
   oneof body {
