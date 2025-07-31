@@ -504,12 +504,227 @@ func (x *UserEvent_OrderCompleted) GetTransactionCount() int64 {
 	return 0
 }
 
+type UserEvent_PaymentSuccess struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Amount        float64                `protobuf:"fixed64,1,opt,name=amount,proto3" json:"amount,omitempty"`
+	ShopperEmail  string                 `protobuf:"bytes,2,opt,name=shopper_email,json=shopperEmail,proto3" json:"shopper_email,omitempty"`
+	ShopperName   string                 `protobuf:"bytes,3,opt,name=shopper_name,json=shopperName,proto3" json:"shopper_name,omitempty"`
+	Sku           string                 `protobuf:"bytes,4,opt,name=sku,proto3" json:"sku,omitempty"`
+	OrderNumber   string                 `protobuf:"bytes,5,opt,name=order_number,json=orderNumber,proto3" json:"order_number,omitempty"`
+	CreatedAt     string                 `protobuf:"bytes,6,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	PaymentStatus string                 `protobuf:"bytes,7,opt,name=payment_status,json=paymentStatus,proto3" json:"payment_status,omitempty"`
+	TransactionId string                 `protobuf:"bytes,8,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	PaidAt        string                 `protobuf:"bytes,9,opt,name=paid_at,json=paidAt,proto3" json:"paid_at,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UserEvent_PaymentSuccess) Reset() {
+	*x = UserEvent_PaymentSuccess{}
+	mi := &file_cevt_msg_user_event_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UserEvent_PaymentSuccess) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UserEvent_PaymentSuccess) ProtoMessage() {}
+
+func (x *UserEvent_PaymentSuccess) ProtoReflect() protoreflect.Message {
+	mi := &file_cevt_msg_user_event_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UserEvent_PaymentSuccess.ProtoReflect.Descriptor instead.
+func (*UserEvent_PaymentSuccess) Descriptor() ([]byte, []int) {
+	return file_cevt_msg_user_event_proto_rawDescGZIP(), []int{0, 4}
+}
+
+func (x *UserEvent_PaymentSuccess) GetAmount() float64 {
+	if x != nil {
+		return x.Amount
+	}
+	return 0
+}
+
+func (x *UserEvent_PaymentSuccess) GetShopperEmail() string {
+	if x != nil {
+		return x.ShopperEmail
+	}
+	return ""
+}
+
+func (x *UserEvent_PaymentSuccess) GetShopperName() string {
+	if x != nil {
+		return x.ShopperName
+	}
+	return ""
+}
+
+func (x *UserEvent_PaymentSuccess) GetSku() string {
+	if x != nil {
+		return x.Sku
+	}
+	return ""
+}
+
+func (x *UserEvent_PaymentSuccess) GetOrderNumber() string {
+	if x != nil {
+		return x.OrderNumber
+	}
+	return ""
+}
+
+func (x *UserEvent_PaymentSuccess) GetCreatedAt() string {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return ""
+}
+
+func (x *UserEvent_PaymentSuccess) GetPaymentStatus() string {
+	if x != nil {
+		return x.PaymentStatus
+	}
+	return ""
+}
+
+func (x *UserEvent_PaymentSuccess) GetTransactionId() string {
+	if x != nil {
+		return x.TransactionId
+	}
+	return ""
+}
+
+func (x *UserEvent_PaymentSuccess) GetPaidAt() string {
+	if x != nil {
+		return x.PaidAt
+	}
+	return ""
+}
+
+type UserEvent_PaymentInitiated struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Amount        float64                `protobuf:"fixed64,1,opt,name=amount,proto3" json:"amount,omitempty"`
+	ShopperEmail  string                 `protobuf:"bytes,2,opt,name=shopper_email,json=shopperEmail,proto3" json:"shopper_email,omitempty"`
+	ShopperName   string                 `protobuf:"bytes,3,opt,name=shopper_name,json=shopperName,proto3" json:"shopper_name,omitempty"`
+	Sku           string                 `protobuf:"bytes,4,opt,name=sku,proto3" json:"sku,omitempty"`
+	OrderNumber   string                 `protobuf:"bytes,5,opt,name=order_number,json=orderNumber,proto3" json:"order_number,omitempty"`
+	CreatedAt     string                 `protobuf:"bytes,6,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	PaymentStatus string                 `protobuf:"bytes,7,opt,name=payment_status,json=paymentStatus,proto3" json:"payment_status,omitempty"`
+	TransactionId string                 `protobuf:"bytes,8,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	PaidAt        string                 `protobuf:"bytes,9,opt,name=paid_at,json=paidAt,proto3" json:"paid_at,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UserEvent_PaymentInitiated) Reset() {
+	*x = UserEvent_PaymentInitiated{}
+	mi := &file_cevt_msg_user_event_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UserEvent_PaymentInitiated) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UserEvent_PaymentInitiated) ProtoMessage() {}
+
+func (x *UserEvent_PaymentInitiated) ProtoReflect() protoreflect.Message {
+	mi := &file_cevt_msg_user_event_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UserEvent_PaymentInitiated.ProtoReflect.Descriptor instead.
+func (*UserEvent_PaymentInitiated) Descriptor() ([]byte, []int) {
+	return file_cevt_msg_user_event_proto_rawDescGZIP(), []int{0, 5}
+}
+
+func (x *UserEvent_PaymentInitiated) GetAmount() float64 {
+	if x != nil {
+		return x.Amount
+	}
+	return 0
+}
+
+func (x *UserEvent_PaymentInitiated) GetShopperEmail() string {
+	if x != nil {
+		return x.ShopperEmail
+	}
+	return ""
+}
+
+func (x *UserEvent_PaymentInitiated) GetShopperName() string {
+	if x != nil {
+		return x.ShopperName
+	}
+	return ""
+}
+
+func (x *UserEvent_PaymentInitiated) GetSku() string {
+	if x != nil {
+		return x.Sku
+	}
+	return ""
+}
+
+func (x *UserEvent_PaymentInitiated) GetOrderNumber() string {
+	if x != nil {
+		return x.OrderNumber
+	}
+	return ""
+}
+
+func (x *UserEvent_PaymentInitiated) GetCreatedAt() string {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return ""
+}
+
+func (x *UserEvent_PaymentInitiated) GetPaymentStatus() string {
+	if x != nil {
+		return x.PaymentStatus
+	}
+	return ""
+}
+
+func (x *UserEvent_PaymentInitiated) GetTransactionId() string {
+	if x != nil {
+		return x.TransactionId
+	}
+	return ""
+}
+
+func (x *UserEvent_PaymentInitiated) GetPaidAt() string {
+	if x != nil {
+		return x.PaidAt
+	}
+	return ""
+}
+
 var File_cevt_msg_user_event_proto protoreflect.FileDescriptor
 
 const file_cevt_msg_user_event_proto_rawDesc = "" +
 	"\n" +
-	"\x19cevt/msg/user_event.proto\x12\bcevt.msg\x1a\x1acevt/msg/tenant_meta.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xd6\n" +
-	"\n" +
+	"\x19cevt/msg/user_event.proto\x12\bcevt.msg\x1a\x1acevt/msg/tenant_meta.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xb4\x0f\n" +
 	"\tUserEvent\x12\x1b\n" +
 	"\tuser_uuid\x18\x1e \x01(\tR\buserUuid\x12\x17\n" +
 	"\auser_id\x18\x1f \x01(\x03R\x06userId\x125\n" +
@@ -551,7 +766,29 @@ const file_cevt_msg_user_event_proto_rawDesc = "" +
 	"\x0etransaction_id\x18\b \x01(\tR\rtransactionId\x12\x17\n" +
 	"\apaid_at\x18\t \x01(\tR\x06paidAt\x12+\n" +
 	"\x11transaction_count\x18\n" +
-	" \x01(\x03R\x10transactionCountB\x06\n" +
+	" \x01(\x03R\x10transactionCount\x1a\xab\x02\n" +
+	"\x0ePaymentSuccess\x12\x16\n" +
+	"\x06amount\x18\x01 \x01(\x01R\x06amount\x12#\n" +
+	"\rshopper_email\x18\x02 \x01(\tR\fshopperEmail\x12!\n" +
+	"\fshopper_name\x18\x03 \x01(\tR\vshopperName\x12\x10\n" +
+	"\x03sku\x18\x04 \x01(\tR\x03sku\x12!\n" +
+	"\forder_number\x18\x05 \x01(\tR\vorderNumber\x12\x1d\n" +
+	"\n" +
+	"created_at\x18\x06 \x01(\tR\tcreatedAt\x12%\n" +
+	"\x0epayment_status\x18\a \x01(\tR\rpaymentStatus\x12%\n" +
+	"\x0etransaction_id\x18\b \x01(\tR\rtransactionId\x12\x17\n" +
+	"\apaid_at\x18\t \x01(\tR\x06paidAt\x1a\xad\x02\n" +
+	"\x10PaymentInitiated\x12\x16\n" +
+	"\x06amount\x18\x01 \x01(\x01R\x06amount\x12#\n" +
+	"\rshopper_email\x18\x02 \x01(\tR\fshopperEmail\x12!\n" +
+	"\fshopper_name\x18\x03 \x01(\tR\vshopperName\x12\x10\n" +
+	"\x03sku\x18\x04 \x01(\tR\x03sku\x12!\n" +
+	"\forder_number\x18\x05 \x01(\tR\vorderNumber\x12\x1d\n" +
+	"\n" +
+	"created_at\x18\x06 \x01(\tR\tcreatedAt\x12%\n" +
+	"\x0epayment_status\x18\a \x01(\tR\rpaymentStatus\x12%\n" +
+	"\x0etransaction_id\x18\b \x01(\tR\rtransactionId\x12\x17\n" +
+	"\apaid_at\x18\t \x01(\tR\x06paidAtB\x06\n" +
 	"\x04bodyB\x89\x01\n" +
 	"\fcom.cevt.msgB\x0eUserEventProtoP\x01Z(github.com/sambatechno/cevt/gen/cevt/msg\xa2\x02\x03CMX\xaa\x02\bCevt.Msg\xca\x02\bCevt\\Msg\xe2\x02\x14Cevt\\Msg\\GPBMetadata\xea\x02\tCevt::Msgb\x06proto3"
 
@@ -567,19 +804,21 @@ func file_cevt_msg_user_event_proto_rawDescGZIP() []byte {
 	return file_cevt_msg_user_event_proto_rawDescData
 }
 
-var file_cevt_msg_user_event_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_cevt_msg_user_event_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
 var file_cevt_msg_user_event_proto_goTypes = []any{
 	(*UserEvent)(nil),                     // 0: cevt.msg.UserEvent
 	(*UserEvent_RegistrationSuccess)(nil), // 1: cevt.msg.UserEvent.RegistrationSuccess
 	(*UserEvent_EmailVerified)(nil),       // 2: cevt.msg.UserEvent.EmailVerified
 	(*UserEvent_VoucherCreated)(nil),      // 3: cevt.msg.UserEvent.VoucherCreated
 	(*UserEvent_OrderCompleted)(nil),      // 4: cevt.msg.UserEvent.OrderCompleted
-	(*TenantMeta)(nil),                    // 5: cevt.msg.TenantMeta
-	(*timestamppb.Timestamp)(nil),         // 6: google.protobuf.Timestamp
+	(*UserEvent_PaymentSuccess)(nil),      // 5: cevt.msg.UserEvent.PaymentSuccess
+	(*UserEvent_PaymentInitiated)(nil),    // 6: cevt.msg.UserEvent.PaymentInitiated
+	(*TenantMeta)(nil),                    // 7: cevt.msg.TenantMeta
+	(*timestamppb.Timestamp)(nil),         // 8: google.protobuf.Timestamp
 }
 var file_cevt_msg_user_event_proto_depIdxs = []int32{
-	5, // 0: cevt.msg.UserEvent.tenant_meta:type_name -> cevt.msg.TenantMeta
-	6, // 1: cevt.msg.UserEvent.create_timestamp:type_name -> google.protobuf.Timestamp
+	7, // 0: cevt.msg.UserEvent.tenant_meta:type_name -> cevt.msg.TenantMeta
+	8, // 1: cevt.msg.UserEvent.create_timestamp:type_name -> google.protobuf.Timestamp
 	1, // 2: cevt.msg.UserEvent.registration_success:type_name -> cevt.msg.UserEvent.RegistrationSuccess
 	2, // 3: cevt.msg.UserEvent.email_verified:type_name -> cevt.msg.UserEvent.EmailVerified
 	3, // 4: cevt.msg.UserEvent.voucher_created:type_name -> cevt.msg.UserEvent.VoucherCreated
@@ -609,7 +848,7 @@ func file_cevt_msg_user_event_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_cevt_msg_user_event_proto_rawDesc), len(file_cevt_msg_user_event_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   5,
+			NumMessages:   7,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

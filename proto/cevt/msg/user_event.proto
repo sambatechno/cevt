@@ -49,6 +49,30 @@ message UserEvent {
     int64 transaction_count = 10;
   }
 
+  message PaymentSuccess {
+    double amount = 1;
+    string shopper_email = 2;
+    string shopper_name = 3;
+    string sku = 4;
+    string order_number = 5;
+    string created_at = 6;
+    string payment_status = 7;
+    string transaction_id = 8;
+    string paid_at = 9;
+  }
+
+  message PaymentInitiated {
+    double amount = 1;
+    string shopper_email = 2;
+    string shopper_name = 3;
+    string sku = 4;
+    string order_number = 5;
+    string created_at = 6;
+    string payment_status = 7;
+    string transaction_id = 8;
+    string paid_at = 9;
+  }
+
   oneof body {
     RegistrationSuccess registration_success = 1;
     EmailVerified email_verified = 2;
