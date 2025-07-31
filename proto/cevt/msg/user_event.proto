@@ -78,5 +78,7 @@ message UserEvent {
     EmailVerified email_verified = 2;
     VoucherCreated voucher_created = 3;
     OrderCompleted order_completed = 4;
+    PaymentSuccess payment_success = 5;
+    PaymentInitiated payment_initiated = 6;
   }
 }

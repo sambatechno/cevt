@@ -34,6 +34,8 @@ type UserEvent struct {
 	//	*UserEvent_EmailVerified_
 	//	*UserEvent_VoucherCreated_
 	//	*UserEvent_OrderCompleted_
+	//	*UserEvent_PaymentSuccess_
+	//	*UserEvent_PaymentInitiated_
 	Body          isUserEvent_Body `protobuf_oneof:"body"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -140,6 +142,24 @@ func (x *UserEvent) GetOrderCompleted() *UserEvent_OrderCompleted {
 	return nil
 }
 
+func (x *UserEvent) GetPaymentSuccess() *UserEvent_PaymentSuccess {
+	if x != nil {
+		if x, ok := x.Body.(*UserEvent_PaymentSuccess_); ok {
+			return x.PaymentSuccess
+		}
+	}
+	return nil
+}
+
+func (x *UserEvent) GetPaymentInitiated() *UserEvent_PaymentInitiated {
+	if x != nil {
+		if x, ok := x.Body.(*UserEvent_PaymentInitiated_); ok {
+			return x.PaymentInitiated
+		}
+	}
+	return nil
+}
+
 type isUserEvent_Body interface {
 	isUserEvent_Body()
 }
@@ -160,6 +180,14 @@ type UserEvent_OrderCompleted_ struct {
 	OrderCompleted *UserEvent_OrderCompleted `protobuf:"bytes,4,opt,name=order_completed,json=orderCompleted,proto3,oneof"`
 }
 
+type UserEvent_PaymentSuccess_ struct {
+	PaymentSuccess *UserEvent_PaymentSuccess `protobuf:"bytes,5,opt,name=payment_success,json=paymentSuccess,proto3,oneof"`
+}
+
+type UserEvent_PaymentInitiated_ struct {
+	PaymentInitiated *UserEvent_PaymentInitiated `protobuf:"bytes,6,opt,name=payment_initiated,json=paymentInitiated,proto3,oneof"`
+}
+
 func (*UserEvent_RegistrationSuccess_) isUserEvent_Body() {}
 
 func (*UserEvent_EmailVerified_) isUserEvent_Body() {}
@@ -167,6 +195,10 @@ func (*UserEvent_EmailVerified_) isUserEvent_Body() {}
 func (*UserEvent_VoucherCreated_) isUserEvent_Body() {}
 
 func (*UserEvent_OrderCompleted_) isUserEvent_Body() {}
+
+func (*UserEvent_PaymentSuccess_) isUserEvent_Body() {}
+
+func (*UserEvent_PaymentInitiated_) isUserEvent_Body() {}
 
 type UserEvent_RegistrationSuccess struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
@@ -724,7 +756,7 @@ var File_cevt_msg_user_event_proto protoreflect.FileDescriptor
 
 const file_cevt_msg_user_event_proto_rawDesc = "" +
 	"\n" +
-	"\x19cevt/msg/user_event.proto\x12\bcevt.msg\x1a\x1acevt/msg/tenant_meta.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xb4\x0f\n" +
+	"\x19cevt/msg/user_event.proto\x12\bcevt.msg\x1a\x1acevt/msg/tenant_meta.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xd8\x10\n" +
 	"\tUserEvent\x12\x1b\n" +
 	"\tuser_uuid\x18\x1e \x01(\tR\buserUuid\x12\x17\n" +
 	"\auser_id\x18\x1f \x01(\x03R\x06userId\x125\n" +
@@ -734,7 +766,9 @@ const file_cevt_msg_user_event_proto_rawDesc = "" +
 	"\x14registration_success\x18\x01 \x01(\v2'.cevt.msg.UserEvent.RegistrationSuccessH\x00R\x13registrationSuccess\x12J\n" +
 	"\x0eemail_verified\x18\x02 \x01(\v2!.cevt.msg.UserEvent.EmailVerifiedH\x00R\remailVerified\x12M\n" +
 	"\x0fvoucher_created\x18\x03 \x01(\v2\".cevt.msg.UserEvent.VoucherCreatedH\x00R\x0evoucherCreated\x12M\n" +
-	"\x0forder_completed\x18\x04 \x01(\v2\".cevt.msg.UserEvent.OrderCompletedH\x00R\x0eorderCompleted\x1a\xcc\x01\n" +
+	"\x0forder_completed\x18\x04 \x01(\v2\".cevt.msg.UserEvent.OrderCompletedH\x00R\x0eorderCompleted\x12M\n" +
+	"\x0fpayment_success\x18\x05 \x01(\v2\".cevt.msg.UserEvent.PaymentSuccessH\x00R\x0epaymentSuccess\x12S\n" +
+	"\x11payment_initiated\x18\x06 \x01(\v2$.cevt.msg.UserEvent.PaymentInitiatedH\x00R\x10paymentInitiated\x1a\xcc\x01\n" +
 	"\x13RegistrationSuccess\x12\x14\n" +
 	"\x05email\x18\x01 \x01(\tR\x05email\x12%\n" +
 	"\x0eemail_verified\x18\x02 \x01(\bR\remailVerified\x12\x1d\n" +
@@ -823,11 +857,13 @@ var file_cevt_msg_user_event_proto_depIdxs = []int32{
 	2, // 3: cevt.msg.UserEvent.email_verified:type_name -> cevt.msg.UserEvent.EmailVerified
 	3, // 4: cevt.msg.UserEvent.voucher_created:type_name -> cevt.msg.UserEvent.VoucherCreated
 	4, // 5: cevt.msg.UserEvent.order_completed:type_name -> cevt.msg.UserEvent.OrderCompleted
-	6, // [6:6] is the sub-list for method output_type
-	6, // [6:6] is the sub-list for method input_type
-	6, // [6:6] is the sub-list for extension type_name
-	6, // [6:6] is the sub-list for extension extendee
-	0, // [0:6] is the sub-list for field type_name
+	5, // 6: cevt.msg.UserEvent.payment_success:type_name -> cevt.msg.UserEvent.PaymentSuccess
+	6, // 7: cevt.msg.UserEvent.payment_initiated:type_name -> cevt.msg.UserEvent.PaymentInitiated
+	8, // [8:8] is the sub-list for method output_type
+	8, // [8:8] is the sub-list for method input_type
+	8, // [8:8] is the sub-list for extension type_name
+	8, // [8:8] is the sub-list for extension extendee
+	0, // [0:8] is the sub-list for field type_name
 }
 
 func init() { file_cevt_msg_user_event_proto_init() }
@@ -841,6 +877,8 @@ func file_cevt_msg_user_event_proto_init() {
 		(*UserEvent_EmailVerified_)(nil),
 		(*UserEvent_VoucherCreated_)(nil),
 		(*UserEvent_OrderCompleted_)(nil),
+		(*UserEvent_PaymentSuccess_)(nil),
+		(*UserEvent_PaymentInitiated_)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
