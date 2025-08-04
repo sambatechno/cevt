@@ -646,15 +646,11 @@ func (x *UserEvent_PaymentSuccess) GetPaidAt() string {
 
 type UserEvent_PaymentInitiated struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Amount        float64                `protobuf:"fixed64,1,opt,name=amount,proto3" json:"amount,omitempty"`
-	ShopperEmail  string                 `protobuf:"bytes,2,opt,name=shopper_email,json=shopperEmail,proto3" json:"shopper_email,omitempty"`
-	ShopperName   string                 `protobuf:"bytes,3,opt,name=shopper_name,json=shopperName,proto3" json:"shopper_name,omitempty"`
-	Sku           string                 `protobuf:"bytes,4,opt,name=sku,proto3" json:"sku,omitempty"`
-	OrderNumber   string                 `protobuf:"bytes,5,opt,name=order_number,json=orderNumber,proto3" json:"order_number,omitempty"`
-	CreatedAt     string                 `protobuf:"bytes,6,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	PaymentStatus string                 `protobuf:"bytes,7,opt,name=payment_status,json=paymentStatus,proto3" json:"payment_status,omitempty"`
-	TransactionId string                 `protobuf:"bytes,8,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
-	PaidAt        string                 `protobuf:"bytes,9,opt,name=paid_at,json=paidAt,proto3" json:"paid_at,omitempty"`
+	InvoiceNumber string                 `protobuf:"bytes,1,opt,name=invoice_number,json=invoiceNumber,proto3" json:"invoice_number,omitempty"`
+	OrderId       string                 `protobuf:"bytes,2,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
+	PaymentAmount float64                `protobuf:"fixed64,3,opt,name=payment_amount,json=paymentAmount,proto3" json:"payment_amount,omitempty"`
+	StoreName     string                 `protobuf:"bytes,4,opt,name=store_name,json=storeName,proto3" json:"store_name,omitempty"`
+	Amount        float64                `protobuf:"fixed64,5,opt,name=amount,proto3" json:"amount,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -689,6 +685,34 @@ func (*UserEvent_PaymentInitiated) Descriptor() ([]byte, []int) {
 	return file_cevt_msg_user_event_proto_rawDescGZIP(), []int{0, 5}
 }
 
+func (x *UserEvent_PaymentInitiated) GetInvoiceNumber() string {
+	if x != nil {
+		return x.InvoiceNumber
+	}
+	return ""
+}
+
+func (x *UserEvent_PaymentInitiated) GetOrderId() string {
+	if x != nil {
+		return x.OrderId
+	}
+	return ""
+}
+
+func (x *UserEvent_PaymentInitiated) GetPaymentAmount() float64 {
+	if x != nil {
+		return x.PaymentAmount
+	}
+	return 0
+}
+
+func (x *UserEvent_PaymentInitiated) GetStoreName() string {
+	if x != nil {
+		return x.StoreName
+	}
+	return ""
+}
+
 func (x *UserEvent_PaymentInitiated) GetAmount() float64 {
 	if x != nil {
 		return x.Amount
@@ -696,67 +720,11 @@ func (x *UserEvent_PaymentInitiated) GetAmount() float64 {
 	return 0
 }
 
-func (x *UserEvent_PaymentInitiated) GetShopperEmail() string {
-	if x != nil {
-		return x.ShopperEmail
-	}
-	return ""
-}
-
-func (x *UserEvent_PaymentInitiated) GetShopperName() string {
-	if x != nil {
-		return x.ShopperName
-	}
-	return ""
-}
-
-func (x *UserEvent_PaymentInitiated) GetSku() string {
-	if x != nil {
-		return x.Sku
-	}
-	return ""
-}
-
-func (x *UserEvent_PaymentInitiated) GetOrderNumber() string {
-	if x != nil {
-		return x.OrderNumber
-	}
-	return ""
-}
-
-func (x *UserEvent_PaymentInitiated) GetCreatedAt() string {
-	if x != nil {
-		return x.CreatedAt
-	}
-	return ""
-}
-
-func (x *UserEvent_PaymentInitiated) GetPaymentStatus() string {
-	if x != nil {
-		return x.PaymentStatus
-	}
-	return ""
-}
-
-func (x *UserEvent_PaymentInitiated) GetTransactionId() string {
-	if x != nil {
-		return x.TransactionId
-	}
-	return ""
-}
-
-func (x *UserEvent_PaymentInitiated) GetPaidAt() string {
-	if x != nil {
-		return x.PaidAt
-	}
-	return ""
-}
-
 var File_cevt_msg_user_event_proto protoreflect.FileDescriptor
 
 const file_cevt_msg_user_event_proto_rawDesc = "" +
 	"\n" +
-	"\x19cevt/msg/user_event.proto\x12\bcevt.msg\x1a\x1acevt/msg/tenant_meta.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xd8\x10\n" +
+	"\x19cevt/msg/user_event.proto\x12\bcevt.msg\x1a\x1acevt/msg/tenant_meta.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xdd\x0f\n" +
 	"\tUserEvent\x12\x1b\n" +
 	"\tuser_uuid\x18\x1e \x01(\tR\buserUuid\x12\x17\n" +
 	"\auser_id\x18\x1f \x01(\x03R\x06userId\x125\n" +
@@ -811,18 +779,14 @@ const file_cevt_msg_user_event_proto_rawDesc = "" +
 	"created_at\x18\x06 \x01(\tR\tcreatedAt\x12%\n" +
 	"\x0epayment_status\x18\a \x01(\tR\rpaymentStatus\x12%\n" +
 	"\x0etransaction_id\x18\b \x01(\tR\rtransactionId\x12\x17\n" +
-	"\apaid_at\x18\t \x01(\tR\x06paidAt\x1a\xad\x02\n" +
-	"\x10PaymentInitiated\x12\x16\n" +
-	"\x06amount\x18\x01 \x01(\x01R\x06amount\x12#\n" +
-	"\rshopper_email\x18\x02 \x01(\tR\fshopperEmail\x12!\n" +
-	"\fshopper_name\x18\x03 \x01(\tR\vshopperName\x12\x10\n" +
-	"\x03sku\x18\x04 \x01(\tR\x03sku\x12!\n" +
-	"\forder_number\x18\x05 \x01(\tR\vorderNumber\x12\x1d\n" +
+	"\apaid_at\x18\t \x01(\tR\x06paidAt\x1a\xb2\x01\n" +
+	"\x10PaymentInitiated\x12%\n" +
+	"\x0einvoice_number\x18\x01 \x01(\tR\rinvoiceNumber\x12\x19\n" +
+	"\border_id\x18\x02 \x01(\tR\aorderId\x12%\n" +
+	"\x0epayment_amount\x18\x03 \x01(\x01R\rpaymentAmount\x12\x1d\n" +
 	"\n" +
-	"created_at\x18\x06 \x01(\tR\tcreatedAt\x12%\n" +
-	"\x0epayment_status\x18\a \x01(\tR\rpaymentStatus\x12%\n" +
-	"\x0etransaction_id\x18\b \x01(\tR\rtransactionId\x12\x17\n" +
-	"\apaid_at\x18\t \x01(\tR\x06paidAtB\x06\n" +
+	"store_name\x18\x04 \x01(\tR\tstoreName\x12\x16\n" +
+	"\x06amount\x18\x05 \x01(\x01R\x06amountB\x06\n" +
 	"\x04bodyB\x89\x01\n" +
 	"\fcom.cevt.msgB\x0eUserEventProtoP\x01Z(github.com/sambatechno/cevt/gen/cevt/msg\xa2\x02\x03CMX\xaa\x02\bCevt.Msg\xca\x02\bCevt\\Msg\xe2\x02\x14Cevt\\Msg\\GPBMetadata\xea\x02\tCevt::Msgb\x06proto3"
 

@@ -62,15 +62,11 @@ message UserEvent {
   }
 
   message PaymentInitiated {
-    double amount = 1;
-    string shopper_email = 2;
-    string shopper_name = 3;
-    string sku = 4;
-    string order_number = 5;
-    string created_at = 6;
-    string payment_status = 7;
-    string transaction_id = 8;
-    string paid_at = 9;
+    string invoice_number = 1;
+    string order_id = 2;
+    double payment_amount = 3;
+    string store_name = 4;
+    double amount = 5;
   }
 
   oneof body {
