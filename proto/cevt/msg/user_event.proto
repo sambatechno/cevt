@@ -59,6 +59,7 @@ message UserEvent {
     string payment_status = 7;
     string transaction_id = 8;
     string paid_at = 9;
+    string payment_method = 10;
   }
 
   message PaymentInitiated {
@@ -67,6 +68,7 @@ message UserEvent {
     double payment_amount = 3;
     string store_name = 4;
     double amount = 5;
+    string payment_method = 6;
   }
 
   oneof body {

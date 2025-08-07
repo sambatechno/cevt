@@ -547,6 +547,7 @@ type UserEvent_PaymentSuccess struct {
 	PaymentStatus string                 `protobuf:"bytes,7,opt,name=payment_status,json=paymentStatus,proto3" json:"payment_status,omitempty"`
 	TransactionId string                 `protobuf:"bytes,8,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
 	PaidAt        string                 `protobuf:"bytes,9,opt,name=paid_at,json=paidAt,proto3" json:"paid_at,omitempty"`
+	PaymentMethod string                 `protobuf:"bytes,10,opt,name=payment_method,json=paymentMethod,proto3" json:"payment_method,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -644,6 +645,13 @@ func (x *UserEvent_PaymentSuccess) GetPaidAt() string {
 	return ""
 }
 
+func (x *UserEvent_PaymentSuccess) GetPaymentMethod() string {
+	if x != nil {
+		return x.PaymentMethod
+	}
+	return ""
+}
+
 type UserEvent_PaymentInitiated struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	InvoiceNumber string                 `protobuf:"bytes,1,opt,name=invoice_number,json=invoiceNumber,proto3" json:"invoice_number,omitempty"`
@@ -651,6 +659,7 @@ type UserEvent_PaymentInitiated struct {
 	PaymentAmount float64                `protobuf:"fixed64,3,opt,name=payment_amount,json=paymentAmount,proto3" json:"payment_amount,omitempty"`
 	StoreName     string                 `protobuf:"bytes,4,opt,name=store_name,json=storeName,proto3" json:"store_name,omitempty"`
 	Amount        float64                `protobuf:"fixed64,5,opt,name=amount,proto3" json:"amount,omitempty"`
+	PaymentMethod string                 `protobuf:"bytes,6,opt,name=payment_method,json=paymentMethod,proto3" json:"payment_method,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -720,11 +729,18 @@ func (x *UserEvent_PaymentInitiated) GetAmount() float64 {
 	return 0
 }
 
+func (x *UserEvent_PaymentInitiated) GetPaymentMethod() string {
+	if x != nil {
+		return x.PaymentMethod
+	}
+	return ""
+}
+
 var File_cevt_msg_user_event_proto protoreflect.FileDescriptor
 
 const file_cevt_msg_user_event_proto_rawDesc = "" +
 	"\n" +
-	"\x19cevt/msg/user_event.proto\x12\bcevt.msg\x1a\x1acevt/msg/tenant_meta.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xdd\x0f\n" +
+	"\x19cevt/msg/user_event.proto\x12\bcevt.msg\x1a\x1acevt/msg/tenant_meta.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xab\x10\n" +
 	"\tUserEvent\x12\x1b\n" +
 	"\tuser_uuid\x18\x1e \x01(\tR\buserUuid\x12\x17\n" +
 	"\auser_id\x18\x1f \x01(\x03R\x06userId\x125\n" +
@@ -768,7 +784,7 @@ const file_cevt_msg_user_event_proto_rawDesc = "" +
 	"\x0etransaction_id\x18\b \x01(\tR\rtransactionId\x12\x17\n" +
 	"\apaid_at\x18\t \x01(\tR\x06paidAt\x12+\n" +
 	"\x11transaction_count\x18\n" +
-	" \x01(\x03R\x10transactionCount\x1a\xab\x02\n" +
+	" \x01(\x03R\x10transactionCount\x1a\xd2\x02\n" +
 	"\x0ePaymentSuccess\x12\x16\n" +
 	"\x06amount\x18\x01 \x01(\x01R\x06amount\x12#\n" +
 	"\rshopper_email\x18\x02 \x01(\tR\fshopperEmail\x12!\n" +
@@ -779,14 +795,17 @@ const file_cevt_msg_user_event_proto_rawDesc = "" +
 	"created_at\x18\x06 \x01(\tR\tcreatedAt\x12%\n" +
 	"\x0epayment_status\x18\a \x01(\tR\rpaymentStatus\x12%\n" +
 	"\x0etransaction_id\x18\b \x01(\tR\rtransactionId\x12\x17\n" +
-	"\apaid_at\x18\t \x01(\tR\x06paidAt\x1a\xb2\x01\n" +
+	"\apaid_at\x18\t \x01(\tR\x06paidAt\x12%\n" +
+	"\x0epayment_method\x18\n" +
+	" \x01(\tR\rpaymentMethod\x1a\xd9\x01\n" +
 	"\x10PaymentInitiated\x12%\n" +
 	"\x0einvoice_number\x18\x01 \x01(\tR\rinvoiceNumber\x12\x19\n" +
 	"\border_id\x18\x02 \x01(\tR\aorderId\x12%\n" +
 	"\x0epayment_amount\x18\x03 \x01(\x01R\rpaymentAmount\x12\x1d\n" +
 	"\n" +
 	"store_name\x18\x04 \x01(\tR\tstoreName\x12\x16\n" +
-	"\x06amount\x18\x05 \x01(\x01R\x06amountB\x06\n" +
+	"\x06amount\x18\x05 \x01(\x01R\x06amount\x12%\n" +
+	"\x0epayment_method\x18\x06 \x01(\tR\rpaymentMethodB\x06\n" +
 	"\x04bodyB\x89\x01\n" +
 	"\fcom.cevt.msgB\x0eUserEventProtoP\x01Z(github.com/sambatechno/cevt/gen/cevt/msg\xa2\x02\x03CMX\xaa\x02\bCevt.Msg\xca\x02\bCevt\\Msg\xe2\x02\x14Cevt\\Msg\\GPBMetadata\xea\x02\tCevt::Msgb\x06proto3"
 
