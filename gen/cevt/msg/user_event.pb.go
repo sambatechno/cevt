@@ -329,16 +329,17 @@ func (x *UserEvent_EmailVerified) GetEmail() string {
 }
 
 type UserEvent_VoucherCreated struct {
-	state           protoimpl.MessageState `protogen:"open.v1"`
-	Code            string                 `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`
-	VoucherType     string                 `protobuf:"bytes,2,opt,name=voucher_type,json=voucherType,proto3" json:"voucher_type,omitempty"`
-	Status          string                 `protobuf:"bytes,3,opt,name=status,proto3" json:"status,omitempty"`
-	PromotionId     string                 `protobuf:"bytes,4,opt,name=promotion_id,json=promotionId,proto3" json:"promotion_id,omitempty"`
-	ExpiredAt       string                 `protobuf:"bytes,5,opt,name=expired_at,json=expiredAt,proto3" json:"expired_at,omitempty"`
-	GeneratedYear   int64                  `protobuf:"varint,6,opt,name=generated_year,json=generatedYear,proto3" json:"generated_year,omitempty"`
-	RedemptionLimit int64                  `protobuf:"varint,7,opt,name=redemption_limit,json=redemptionLimit,proto3" json:"redemption_limit,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state       protoimpl.MessageState `protogen:"open.v1"`
+	VoucherCode string                 `protobuf:"bytes,1,opt,name=voucher_code,json=voucherCode,proto3" json:"voucher_code,omitempty"`
+	// string voucher_type = 2;
+	// string status = 3;
+	PromotionId string `protobuf:"bytes,4,opt,name=promotion_id,json=promotionId,proto3" json:"promotion_id,omitempty"`
+	ExpiredAt   string `protobuf:"bytes,5,opt,name=expired_at,json=expiredAt,proto3" json:"expired_at,omitempty"`
+	// int64 generated_year = 6;
+	// int64 redemption_limit = 7;
+	PromoName     string `protobuf:"bytes,8,opt,name=promo_name,json=promoName,proto3" json:"promo_name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *UserEvent_VoucherCreated) Reset() {
@@ -371,23 +372,9 @@ func (*UserEvent_VoucherCreated) Descriptor() ([]byte, []int) {
 	return file_cevt_msg_user_event_proto_rawDescGZIP(), []int{0, 2}
 }
 
-func (x *UserEvent_VoucherCreated) GetCode() string {
+func (x *UserEvent_VoucherCreated) GetVoucherCode() string {
 	if x != nil {
-		return x.Code
-	}
-	return ""
-}
-
-func (x *UserEvent_VoucherCreated) GetVoucherType() string {
-	if x != nil {
-		return x.VoucherType
-	}
-	return ""
-}
-
-func (x *UserEvent_VoucherCreated) GetStatus() string {
-	if x != nil {
-		return x.Status
+		return x.VoucherCode
 	}
 	return ""
 }
@@ -406,18 +393,11 @@ func (x *UserEvent_VoucherCreated) GetExpiredAt() string {
 	return ""
 }
 
-func (x *UserEvent_VoucherCreated) GetGeneratedYear() int64 {
+func (x *UserEvent_VoucherCreated) GetPromoName() string {
 	if x != nil {
-		return x.GeneratedYear
+		return x.PromoName
 	}
-	return 0
-}
-
-func (x *UserEvent_VoucherCreated) GetRedemptionLimit() int64 {
-	if x != nil {
-		return x.RedemptionLimit
-	}
-	return 0
+	return ""
 }
 
 type UserEvent_OrderCompleted struct {
@@ -548,6 +528,10 @@ type UserEvent_PaymentSuccess struct {
 	TransactionId string                 `protobuf:"bytes,8,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
 	PaidAt        string                 `protobuf:"bytes,9,opt,name=paid_at,json=paidAt,proto3" json:"paid_at,omitempty"`
 	PaymentMethod string                 `protobuf:"bytes,10,opt,name=payment_method,json=paymentMethod,proto3" json:"payment_method,omitempty"`
+	CardBrand     string                 `protobuf:"bytes,11,opt,name=card_brand,json=cardBrand,proto3" json:"card_brand,omitempty"`
+	OrderId       string                 `protobuf:"bytes,12,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
+	PaymentAmount float64                `protobuf:"fixed64,13,opt,name=payment_amount,json=paymentAmount,proto3" json:"payment_amount,omitempty"`
+	StoreName     string                 `protobuf:"bytes,14,opt,name=store_name,json=storeName,proto3" json:"store_name,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -652,6 +636,34 @@ func (x *UserEvent_PaymentSuccess) GetPaymentMethod() string {
 	return ""
 }
 
+func (x *UserEvent_PaymentSuccess) GetCardBrand() string {
+	if x != nil {
+		return x.CardBrand
+	}
+	return ""
+}
+
+func (x *UserEvent_PaymentSuccess) GetOrderId() string {
+	if x != nil {
+		return x.OrderId
+	}
+	return ""
+}
+
+func (x *UserEvent_PaymentSuccess) GetPaymentAmount() float64 {
+	if x != nil {
+		return x.PaymentAmount
+	}
+	return 0
+}
+
+func (x *UserEvent_PaymentSuccess) GetStoreName() string {
+	if x != nil {
+		return x.StoreName
+	}
+	return ""
+}
+
 type UserEvent_PaymentInitiated struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	InvoiceNumber string                 `protobuf:"bytes,1,opt,name=invoice_number,json=invoiceNumber,proto3" json:"invoice_number,omitempty"`
@@ -660,6 +672,8 @@ type UserEvent_PaymentInitiated struct {
 	StoreName     string                 `protobuf:"bytes,4,opt,name=store_name,json=storeName,proto3" json:"store_name,omitempty"`
 	Amount        float64                `protobuf:"fixed64,5,opt,name=amount,proto3" json:"amount,omitempty"`
 	PaymentMethod string                 `protobuf:"bytes,6,opt,name=payment_method,json=paymentMethod,proto3" json:"payment_method,omitempty"`
+	CardBrand     string                 `protobuf:"bytes,7,opt,name=card_brand,json=cardBrand,proto3" json:"card_brand,omitempty"`
+	OrderNumber   string                 `protobuf:"bytes,8,opt,name=order_number,json=orderNumber,proto3" json:"order_number,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -736,11 +750,25 @@ func (x *UserEvent_PaymentInitiated) GetPaymentMethod() string {
 	return ""
 }
 
+func (x *UserEvent_PaymentInitiated) GetCardBrand() string {
+	if x != nil {
+		return x.CardBrand
+	}
+	return ""
+}
+
+func (x *UserEvent_PaymentInitiated) GetOrderNumber() string {
+	if x != nil {
+		return x.OrderNumber
+	}
+	return ""
+}
+
 var File_cevt_msg_user_event_proto protoreflect.FileDescriptor
 
 const file_cevt_msg_user_event_proto_rawDesc = "" +
 	"\n" +
-	"\x19cevt/msg/user_event.proto\x12\bcevt.msg\x1a\x1acevt/msg/tenant_meta.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xab\x10\n" +
+	"\x19cevt/msg/user_event.proto\x12\bcevt.msg\x1a\x1acevt/msg/tenant_meta.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x8e\x11\n" +
 	"\tUserEvent\x12\x1b\n" +
 	"\tuser_uuid\x18\x1e \x01(\tR\buserUuid\x12\x17\n" +
 	"\auser_id\x18\x1f \x01(\x03R\x06userId\x125\n" +
@@ -762,16 +790,14 @@ const file_cevt_msg_user_event_proto_rawDesc = "" +
 	"\x05phone\x18\x05 \x01(\tR\x05phone\x12&\n" +
 	"\x0fuser_created_by\x18\x06 \x01(\tR\ruserCreatedBy\x1a%\n" +
 	"\rEmailVerified\x12\x14\n" +
-	"\x05email\x18\x01 \x01(\tR\x05email\x1a\xf3\x01\n" +
-	"\x0eVoucherCreated\x12\x12\n" +
-	"\x04code\x18\x01 \x01(\tR\x04code\x12!\n" +
-	"\fvoucher_type\x18\x02 \x01(\tR\vvoucherType\x12\x16\n" +
-	"\x06status\x18\x03 \x01(\tR\x06status\x12!\n" +
+	"\x05email\x18\x01 \x01(\tR\x05email\x1a\x94\x01\n" +
+	"\x0eVoucherCreated\x12!\n" +
+	"\fvoucher_code\x18\x01 \x01(\tR\vvoucherCode\x12!\n" +
 	"\fpromotion_id\x18\x04 \x01(\tR\vpromotionId\x12\x1d\n" +
 	"\n" +
-	"expired_at\x18\x05 \x01(\tR\texpiredAt\x12%\n" +
-	"\x0egenerated_year\x18\x06 \x01(\x03R\rgeneratedYear\x12)\n" +
-	"\x10redemption_limit\x18\a \x01(\x03R\x0fredemptionLimit\x1a\xd8\x02\n" +
+	"expired_at\x18\x05 \x01(\tR\texpiredAt\x12\x1d\n" +
+	"\n" +
+	"promo_name\x18\b \x01(\tR\tpromoName\x1a\xd8\x02\n" +
 	"\x0eOrderCompleted\x12\x16\n" +
 	"\x06amount\x18\x01 \x01(\x01R\x06amount\x12#\n" +
 	"\rshopper_email\x18\x02 \x01(\tR\fshopperEmail\x12!\n" +
@@ -784,7 +810,7 @@ const file_cevt_msg_user_event_proto_rawDesc = "" +
 	"\x0etransaction_id\x18\b \x01(\tR\rtransactionId\x12\x17\n" +
 	"\apaid_at\x18\t \x01(\tR\x06paidAt\x12+\n" +
 	"\x11transaction_count\x18\n" +
-	" \x01(\x03R\x10transactionCount\x1a\xd2\x02\n" +
+	" \x01(\x03R\x10transactionCount\x1a\xd2\x03\n" +
 	"\x0ePaymentSuccess\x12\x16\n" +
 	"\x06amount\x18\x01 \x01(\x01R\x06amount\x12#\n" +
 	"\rshopper_email\x18\x02 \x01(\tR\fshopperEmail\x12!\n" +
@@ -797,7 +823,13 @@ const file_cevt_msg_user_event_proto_rawDesc = "" +
 	"\x0etransaction_id\x18\b \x01(\tR\rtransactionId\x12\x17\n" +
 	"\apaid_at\x18\t \x01(\tR\x06paidAt\x12%\n" +
 	"\x0epayment_method\x18\n" +
-	" \x01(\tR\rpaymentMethod\x1a\xd9\x01\n" +
+	" \x01(\tR\rpaymentMethod\x12\x1d\n" +
+	"\n" +
+	"card_brand\x18\v \x01(\tR\tcardBrand\x12\x19\n" +
+	"\border_id\x18\f \x01(\tR\aorderId\x12%\n" +
+	"\x0epayment_amount\x18\r \x01(\x01R\rpaymentAmount\x12\x1d\n" +
+	"\n" +
+	"store_name\x18\x0e \x01(\tR\tstoreName\x1a\x9b\x02\n" +
 	"\x10PaymentInitiated\x12%\n" +
 	"\x0einvoice_number\x18\x01 \x01(\tR\rinvoiceNumber\x12\x19\n" +
 	"\border_id\x18\x02 \x01(\tR\aorderId\x12%\n" +
@@ -805,7 +837,10 @@ const file_cevt_msg_user_event_proto_rawDesc = "" +
 	"\n" +
 	"store_name\x18\x04 \x01(\tR\tstoreName\x12\x16\n" +
 	"\x06amount\x18\x05 \x01(\x01R\x06amount\x12%\n" +
-	"\x0epayment_method\x18\x06 \x01(\tR\rpaymentMethodB\x06\n" +
+	"\x0epayment_method\x18\x06 \x01(\tR\rpaymentMethod\x12\x1d\n" +
+	"\n" +
+	"card_brand\x18\a \x01(\tR\tcardBrand\x12!\n" +
+	"\forder_number\x18\b \x01(\tR\vorderNumberB\x06\n" +
 	"\x04bodyB\x89\x01\n" +
 	"\fcom.cevt.msgB\x0eUserEventProtoP\x01Z(github.com/sambatechno/cevt/gen/cevt/msg\xa2\x02\x03CMX\xaa\x02\bCevt.Msg\xca\x02\bCevt\\Msg\xe2\x02\x14Cevt\\Msg\\GPBMetadata\xea\x02\tCevt::Msgb\x06proto3"
 
