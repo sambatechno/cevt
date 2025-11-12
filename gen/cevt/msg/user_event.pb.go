@@ -546,6 +546,7 @@ type UserEvent_OrderPaid struct {
 	TransactionCount int64                  `protobuf:"varint,10,opt,name=transaction_count,json=transactionCount,proto3" json:"transaction_count,omitempty"`
 	PointUsed        int32                  `protobuf:"varint,11,opt,name=point_used,json=pointUsed,proto3" json:"point_used,omitempty"`
 	Qty              int32                  `protobuf:"varint,12,opt,name=qty,proto3" json:"qty,omitempty"`
+	Sku              []string               `protobuf:"bytes,13,rep,name=sku,proto3" json:"sku,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -662,6 +663,13 @@ func (x *UserEvent_OrderPaid) GetQty() int32 {
 		return x.Qty
 	}
 	return 0
+}
+
+func (x *UserEvent_OrderPaid) GetSku() []string {
+	if x != nil {
+		return x.Sku
+	}
+	return nil
 }
 
 type UserEvent_PaymentSuccess struct {
@@ -916,7 +924,7 @@ var File_cevt_msg_user_event_proto protoreflect.FileDescriptor
 
 const file_cevt_msg_user_event_proto_rawDesc = "" +
 	"\n" +
-	"\x19cevt/msg/user_event.proto\x12\bcevt.msg\x1a\x1acevt/msg/tenant_meta.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xd9\x14\n" +
+	"\x19cevt/msg/user_event.proto\x12\bcevt.msg\x1a\x1acevt/msg/tenant_meta.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xeb\x14\n" +
 	"\tUserEvent\x12\x1b\n" +
 	"\tuser_uuid\x18\x1e \x01(\tR\buserUuid\x12\x17\n" +
 	"\auser_id\x18\x1f \x01(\x03R\x06userId\x125\n" +
@@ -960,7 +968,7 @@ const file_cevt_msg_user_event_proto_rawDesc = "" +
 	"\x0etransaction_id\x18\b \x01(\tR\rtransactionId\x12\x17\n" +
 	"\apaid_at\x18\t \x01(\tR\x06paidAt\x12+\n" +
 	"\x11transaction_count\x18\n" +
-	" \x01(\x03R\x10transactionCount\x1a\x88\x03\n" +
+	" \x01(\x03R\x10transactionCount\x1a\x9a\x03\n" +
 	"\tOrderPaid\x12\x16\n" +
 	"\x06amount\x18\x01 \x01(\x01R\x06amount\x12#\n" +
 	"\rshopper_email\x18\x02 \x01(\tR\fshopperEmail\x12!\n" +
@@ -976,7 +984,8 @@ const file_cevt_msg_user_event_proto_rawDesc = "" +
 	" \x01(\x03R\x10transactionCount\x12\x1d\n" +
 	"\n" +
 	"point_used\x18\v \x01(\x05R\tpointUsed\x12\x10\n" +
-	"\x03qty\x18\f \x01(\x05R\x03qty\x1a\xd2\x03\n" +
+	"\x03qty\x18\f \x01(\x05R\x03qty\x12\x10\n" +
+	"\x03sku\x18\r \x03(\tR\x03sku\x1a\xd2\x03\n" +
 	"\x0ePaymentSuccess\x12\x16\n" +
 	"\x06amount\x18\x01 \x01(\x01R\x06amount\x12#\n" +
 	"\rshopper_email\x18\x02 \x01(\tR\fshopperEmail\x12!\n" +

@@ -63,6 +63,7 @@ message UserEvent {
     int64 transaction_count = 10;
     int32 point_used = 11;
     int32 qty = 12;
+    repeated string sku = 13;
   }
 
   message PaymentSuccess {
