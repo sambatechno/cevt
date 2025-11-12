@@ -50,6 +50,21 @@ message UserEvent {
     int64 transaction_count = 10;
   }
 
+  message OrderPaid {
+    double amount = 1;
+    string shopper_email = 2;
+    string shopper_name = 3;
+    string items = 4;
+    string order_number = 5;
+    string created_at = 6;
+    string payment_status = 7;
+    string transaction_id = 8;
+    string paid_at = 9;
+    int64 transaction_count = 10;
+    int32 point_used = 11;
+    int32 qty = 12;
+  }
+
   message PaymentSuccess {
     double amount = 1;
     string shopper_email = 2;
@@ -85,5 +100,6 @@ message UserEvent {
     OrderCompleted order_completed = 4;
     PaymentSuccess payment_success = 5;
     PaymentInitiated payment_initiated = 6;
+    OrderPaid order_paid = 7;
   }
 }
