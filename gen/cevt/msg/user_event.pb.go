@@ -830,6 +830,7 @@ type UserEvent_PaymentInitiated struct {
 	PaymentMethod string                 `protobuf:"bytes,6,opt,name=payment_method,json=paymentMethod,proto3" json:"payment_method,omitempty"`
 	CardBrand     string                 `protobuf:"bytes,7,opt,name=card_brand,json=cardBrand,proto3" json:"card_brand,omitempty"`
 	OrderNumber   string                 `protobuf:"bytes,8,opt,name=order_number,json=orderNumber,proto3" json:"order_number,omitempty"`
+	TransactionId string                 `protobuf:"bytes,9,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -920,11 +921,18 @@ func (x *UserEvent_PaymentInitiated) GetOrderNumber() string {
 	return ""
 }
 
+func (x *UserEvent_PaymentInitiated) GetTransactionId() string {
+	if x != nil {
+		return x.TransactionId
+	}
+	return ""
+}
+
 var File_cevt_msg_user_event_proto protoreflect.FileDescriptor
 
 const file_cevt_msg_user_event_proto_rawDesc = "" +
 	"\n" +
-	"\x19cevt/msg/user_event.proto\x12\bcevt.msg\x1a\x1acevt/msg/tenant_meta.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xeb\x14\n" +
+	"\x19cevt/msg/user_event.proto\x12\bcevt.msg\x1a\x1acevt/msg/tenant_meta.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x92\x15\n" +
 	"\tUserEvent\x12\x1b\n" +
 	"\tuser_uuid\x18\x1e \x01(\tR\buserUuid\x12\x17\n" +
 	"\auser_id\x18\x1f \x01(\x03R\x06userId\x125\n" +
@@ -1004,7 +1012,7 @@ const file_cevt_msg_user_event_proto_rawDesc = "" +
 	"\border_id\x18\f \x01(\tR\aorderId\x12%\n" +
 	"\x0epayment_amount\x18\r \x01(\x01R\rpaymentAmount\x12\x1d\n" +
 	"\n" +
-	"store_name\x18\x0e \x01(\tR\tstoreName\x1a\x9b\x02\n" +
+	"store_name\x18\x0e \x01(\tR\tstoreName\x1a\xc2\x02\n" +
 	"\x10PaymentInitiated\x12%\n" +
 	"\x0einvoice_number\x18\x01 \x01(\tR\rinvoiceNumber\x12\x19\n" +
 	"\border_id\x18\x02 \x01(\tR\aorderId\x12%\n" +
@@ -1015,7 +1023,8 @@ const file_cevt_msg_user_event_proto_rawDesc = "" +
 	"\x0epayment_method\x18\x06 \x01(\tR\rpaymentMethod\x12\x1d\n" +
 	"\n" +
 	"card_brand\x18\a \x01(\tR\tcardBrand\x12!\n" +
-	"\forder_number\x18\b \x01(\tR\vorderNumberB\x06\n" +
+	"\forder_number\x18\b \x01(\tR\vorderNumber\x12%\n" +
+	"\x0etransaction_id\x18\t \x01(\tR\rtransactionIdB\x06\n" +
 	"\x04bodyB\x89\x01\n" +
 	"\fcom.cevt.msgB\x0eUserEventProtoP\x01Z(github.com/sambatechno/cevt/gen/cevt/msg\xa2\x02\x03CMX\xaa\x02\bCevt.Msg\xca\x02\bCevt\\Msg\xe2\x02\x14Cevt\\Msg\\GPBMetadata\xea\x02\tCevt::Msgb\x06proto3"
 
