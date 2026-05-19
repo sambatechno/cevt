@@ -11,7 +11,20 @@ message UserEvent {
 
   TenantMeta tenant_meta = 50;
 
+  // JSON-encoded mobile tracking context for server-side GA4 publishing.
+  // Shape: {"ga_client_id": "...", "ga_session_id": "...", "ga_user_id": "...", "captured_at": "..."}.
+  // Empty string when no mobile context is available (H2H, POS, backoffice paths).
+  string tracking_context = 60;
+
   google.protobuf.Timestamp create_timestamp = 100;
+
+  message LineItem {
+    string item_id = 1;
+    string item_name = 2;
+    int32 quantity = 3;
+    double price = 4;
+    string item_category = 5;
+  }
 
   message RegistrationSuccess {
     string email = 1;
@@ -64,6 +77,8 @@ message UserEvent {
     int32 point_used = 11;
     int32 qty = 12;
     repeated string sku = 13;
+    repeated LineItem line_items = 14;
+    string currency = 15;
   }
 
   message PaymentSuccess {
@@ -81,6 +96,8 @@ message UserEvent {
     string order_id = 12;
     double payment_amount = 13;
     string store_name = 14;
+    repeated LineItem line_items = 15;
+    string currency = 16;
   }
 
   message PaymentInitiated {
@@ -93,6 +110,8 @@ message UserEvent {
     string card_brand = 7;
     string order_number = 8;
     string transaction_id = 9;
+    repeated LineItem line_items = 10;
+    string currency = 11;
   }
 
   oneof body {
