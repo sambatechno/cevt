@@ -100,6 +100,22 @@ message UserEvent {
     string currency = 16;
   }
 
+  message Refund {
+    double amount = 1;
+    string shopper_email = 2;
+    string shopper_name = 3;
+    string order_number = 5;
+    string created_at = 6;
+    string payment_status = 7;
+    string transaction_id = 8;
+    string refunded_at = 9;
+    int64 transaction_count = 10;
+    int32 qty = 12;
+    repeated string sku = 13;
+    repeated LineItem line_items = 14;
+    string currency = 15;
+  }
+
   message PaymentInitiated {
     string invoice_number = 1;
     string order_id = 2;
@@ -122,5 +138,6 @@ message UserEvent {
     PaymentSuccess payment_success = 5;
     PaymentInitiated payment_initiated = 6;
     OrderPaid order_paid = 7;
+    Refund refund = 8;
   }
 }
