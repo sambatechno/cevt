@@ -41,6 +41,7 @@ type UserEvent struct {
 	//	*UserEvent_PaymentSuccess_
 	//	*UserEvent_PaymentInitiated_
 	//	*UserEvent_OrderPaid_
+	//	*UserEvent_Refund_
 	Body          isUserEvent_Body `protobuf_oneof:"body"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -181,6 +182,15 @@ func (x *UserEvent) GetOrderPaid() *UserEvent_OrderPaid {
 	return nil
 }
 
+func (x *UserEvent) GetRefund() *UserEvent_Refund {
+	if x != nil {
+		if x, ok := x.Body.(*UserEvent_Refund_); ok {
+			return x.Refund
+		}
+	}
+	return nil
+}
+
 type isUserEvent_Body interface {
 	isUserEvent_Body()
 }
@@ -213,6 +223,10 @@ type UserEvent_OrderPaid_ struct {
 	OrderPaid *UserEvent_OrderPaid `protobuf:"bytes,7,opt,name=order_paid,json=orderPaid,proto3,oneof"`
 }
 
+type UserEvent_Refund_ struct {
+	Refund *UserEvent_Refund `protobuf:"bytes,8,opt,name=refund,proto3,oneof"`
+}
+
 func (*UserEvent_RegistrationSuccess_) isUserEvent_Body() {}
 
 func (*UserEvent_EmailVerified_) isUserEvent_Body() {}
@@ -226,6 +240,8 @@ func (*UserEvent_PaymentSuccess_) isUserEvent_Body() {}
 func (*UserEvent_PaymentInitiated_) isUserEvent_Body() {}
 
 func (*UserEvent_OrderPaid_) isUserEvent_Body() {}
+
+func (*UserEvent_Refund_) isUserEvent_Body() {}
 
 type UserEvent_LineItem struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
@@ -939,6 +955,146 @@ func (x *UserEvent_PaymentSuccess) GetCurrency() string {
 	return ""
 }
 
+type UserEvent_Refund struct {
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	Amount           float64                `protobuf:"fixed64,1,opt,name=amount,proto3" json:"amount,omitempty"`
+	ShopperEmail     string                 `protobuf:"bytes,2,opt,name=shopper_email,json=shopperEmail,proto3" json:"shopper_email,omitempty"`
+	ShopperName      string                 `protobuf:"bytes,3,opt,name=shopper_name,json=shopperName,proto3" json:"shopper_name,omitempty"`
+	OrderNumber      string                 `protobuf:"bytes,5,opt,name=order_number,json=orderNumber,proto3" json:"order_number,omitempty"`
+	CreatedAt        string                 `protobuf:"bytes,6,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	PaymentStatus    string                 `protobuf:"bytes,7,opt,name=payment_status,json=paymentStatus,proto3" json:"payment_status,omitempty"`
+	TransactionId    string                 `protobuf:"bytes,8,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	RefundedAt       string                 `protobuf:"bytes,9,opt,name=refunded_at,json=refundedAt,proto3" json:"refunded_at,omitempty"`
+	TransactionCount int64                  `protobuf:"varint,10,opt,name=transaction_count,json=transactionCount,proto3" json:"transaction_count,omitempty"`
+	Qty              int32                  `protobuf:"varint,12,opt,name=qty,proto3" json:"qty,omitempty"`
+	Sku              []string               `protobuf:"bytes,13,rep,name=sku,proto3" json:"sku,omitempty"`
+	LineItems        []*UserEvent_LineItem  `protobuf:"bytes,14,rep,name=line_items,json=lineItems,proto3" json:"line_items,omitempty"`
+	Currency         string                 `protobuf:"bytes,15,opt,name=currency,proto3" json:"currency,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *UserEvent_Refund) Reset() {
+	*x = UserEvent_Refund{}
+	mi := &file_cevt_msg_user_event_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UserEvent_Refund) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UserEvent_Refund) ProtoMessage() {}
+
+func (x *UserEvent_Refund) ProtoReflect() protoreflect.Message {
+	mi := &file_cevt_msg_user_event_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UserEvent_Refund.ProtoReflect.Descriptor instead.
+func (*UserEvent_Refund) Descriptor() ([]byte, []int) {
+	return file_cevt_msg_user_event_proto_rawDescGZIP(), []int{0, 7}
+}
+
+func (x *UserEvent_Refund) GetAmount() float64 {
+	if x != nil {
+		return x.Amount
+	}
+	return 0
+}
+
+func (x *UserEvent_Refund) GetShopperEmail() string {
+	if x != nil {
+		return x.ShopperEmail
+	}
+	return ""
+}
+
+func (x *UserEvent_Refund) GetShopperName() string {
+	if x != nil {
+		return x.ShopperName
+	}
+	return ""
+}
+
+func (x *UserEvent_Refund) GetOrderNumber() string {
+	if x != nil {
+		return x.OrderNumber
+	}
+	return ""
+}
+
+func (x *UserEvent_Refund) GetCreatedAt() string {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return ""
+}
+
+func (x *UserEvent_Refund) GetPaymentStatus() string {
+	if x != nil {
+		return x.PaymentStatus
+	}
+	return ""
+}
+
+func (x *UserEvent_Refund) GetTransactionId() string {
+	if x != nil {
+		return x.TransactionId
+	}
+	return ""
+}
+
+func (x *UserEvent_Refund) GetRefundedAt() string {
+	if x != nil {
+		return x.RefundedAt
+	}
+	return ""
+}
+
+func (x *UserEvent_Refund) GetTransactionCount() int64 {
+	if x != nil {
+		return x.TransactionCount
+	}
+	return 0
+}
+
+func (x *UserEvent_Refund) GetQty() int32 {
+	if x != nil {
+		return x.Qty
+	}
+	return 0
+}
+
+func (x *UserEvent_Refund) GetSku() []string {
+	if x != nil {
+		return x.Sku
+	}
+	return nil
+}
+
+func (x *UserEvent_Refund) GetLineItems() []*UserEvent_LineItem {
+	if x != nil {
+		return x.LineItems
+	}
+	return nil
+}
+
+func (x *UserEvent_Refund) GetCurrency() string {
+	if x != nil {
+		return x.Currency
+	}
+	return ""
+}
+
 type UserEvent_PaymentInitiated struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	InvoiceNumber string                 `protobuf:"bytes,1,opt,name=invoice_number,json=invoiceNumber,proto3" json:"invoice_number,omitempty"`
@@ -958,7 +1114,7 @@ type UserEvent_PaymentInitiated struct {
 
 func (x *UserEvent_PaymentInitiated) Reset() {
 	*x = UserEvent_PaymentInitiated{}
-	mi := &file_cevt_msg_user_event_proto_msgTypes[8]
+	mi := &file_cevt_msg_user_event_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -970,7 +1126,7 @@ func (x *UserEvent_PaymentInitiated) String() string {
 func (*UserEvent_PaymentInitiated) ProtoMessage() {}
 
 func (x *UserEvent_PaymentInitiated) ProtoReflect() protoreflect.Message {
-	mi := &file_cevt_msg_user_event_proto_msgTypes[8]
+	mi := &file_cevt_msg_user_event_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -983,7 +1139,7 @@ func (x *UserEvent_PaymentInitiated) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserEvent_PaymentInitiated.ProtoReflect.Descriptor instead.
 func (*UserEvent_PaymentInitiated) Descriptor() ([]byte, []int) {
-	return file_cevt_msg_user_event_proto_rawDescGZIP(), []int{0, 7}
+	return file_cevt_msg_user_event_proto_rawDescGZIP(), []int{0, 8}
 }
 
 func (x *UserEvent_PaymentInitiated) GetInvoiceNumber() string {
@@ -1067,7 +1223,7 @@ var File_cevt_msg_user_event_proto protoreflect.FileDescriptor
 
 const file_cevt_msg_user_event_proto_rawDesc = "" +
 	"\n" +
-	"\x19cevt/msg/user_event.proto\x12\bcevt.msg\x1a\x1acevt/msg/tenant_meta.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xe2\x18\n" +
+	"\x19cevt/msg/user_event.proto\x12\bcevt.msg\x1a\x1acevt/msg/tenant_meta.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xde\x1c\n" +
 	"\tUserEvent\x12\x1b\n" +
 	"\tuser_uuid\x18\x1e \x01(\tR\buserUuid\x12\x17\n" +
 	"\auser_id\x18\x1f \x01(\x03R\x06userId\x125\n" +
@@ -1082,7 +1238,8 @@ const file_cevt_msg_user_event_proto_rawDesc = "" +
 	"\x0fpayment_success\x18\x05 \x01(\v2\".cevt.msg.UserEvent.PaymentSuccessH\x00R\x0epaymentSuccess\x12S\n" +
 	"\x11payment_initiated\x18\x06 \x01(\v2$.cevt.msg.UserEvent.PaymentInitiatedH\x00R\x10paymentInitiated\x12>\n" +
 	"\n" +
-	"order_paid\x18\a \x01(\v2\x1d.cevt.msg.UserEvent.OrderPaidH\x00R\torderPaid\x1a\x97\x01\n" +
+	"order_paid\x18\a \x01(\v2\x1d.cevt.msg.UserEvent.OrderPaidH\x00R\torderPaid\x124\n" +
+	"\x06refund\x18\b \x01(\v2\x1a.cevt.msg.UserEvent.RefundH\x00R\x06refund\x1a\x97\x01\n" +
 	"\bLineItem\x12\x17\n" +
 	"\aitem_id\x18\x01 \x01(\tR\x06itemId\x12\x1b\n" +
 	"\titem_name\x18\x02 \x01(\tR\bitemName\x12\x1a\n" +
@@ -1160,7 +1317,25 @@ const file_cevt_msg_user_event_proto_rawDesc = "" +
 	"store_name\x18\x0e \x01(\tR\tstoreName\x12;\n" +
 	"\n" +
 	"line_items\x18\x0f \x03(\v2\x1c.cevt.msg.UserEvent.LineItemR\tlineItems\x12\x1a\n" +
-	"\bcurrency\x18\x10 \x01(\tR\bcurrency\x1a\x9b\x03\n" +
+	"\bcurrency\x18\x10 \x01(\tR\bcurrency\x1a\xc3\x03\n" +
+	"\x06Refund\x12\x16\n" +
+	"\x06amount\x18\x01 \x01(\x01R\x06amount\x12#\n" +
+	"\rshopper_email\x18\x02 \x01(\tR\fshopperEmail\x12!\n" +
+	"\fshopper_name\x18\x03 \x01(\tR\vshopperName\x12!\n" +
+	"\forder_number\x18\x05 \x01(\tR\vorderNumber\x12\x1d\n" +
+	"\n" +
+	"created_at\x18\x06 \x01(\tR\tcreatedAt\x12%\n" +
+	"\x0epayment_status\x18\a \x01(\tR\rpaymentStatus\x12%\n" +
+	"\x0etransaction_id\x18\b \x01(\tR\rtransactionId\x12\x1f\n" +
+	"\vrefunded_at\x18\t \x01(\tR\n" +
+	"refundedAt\x12+\n" +
+	"\x11transaction_count\x18\n" +
+	" \x01(\x03R\x10transactionCount\x12\x10\n" +
+	"\x03qty\x18\f \x01(\x05R\x03qty\x12\x10\n" +
+	"\x03sku\x18\r \x03(\tR\x03sku\x12;\n" +
+	"\n" +
+	"line_items\x18\x0e \x03(\v2\x1c.cevt.msg.UserEvent.LineItemR\tlineItems\x12\x1a\n" +
+	"\bcurrency\x18\x0f \x01(\tR\bcurrency\x1a\x9b\x03\n" +
 	"\x10PaymentInitiated\x12%\n" +
 	"\x0einvoice_number\x18\x01 \x01(\tR\rinvoiceNumber\x12\x19\n" +
 	"\border_id\x18\x02 \x01(\tR\aorderId\x12%\n" +
@@ -1192,7 +1367,7 @@ func file_cevt_msg_user_event_proto_rawDescGZIP() []byte {
 	return file_cevt_msg_user_event_proto_rawDescData
 }
 
-var file_cevt_msg_user_event_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
+var file_cevt_msg_user_event_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_cevt_msg_user_event_proto_goTypes = []any{
 	(*UserEvent)(nil),                     // 0: cevt.msg.UserEvent
 	(*UserEvent_LineItem)(nil),            // 1: cevt.msg.UserEvent.LineItem
@@ -1202,28 +1377,31 @@ var file_cevt_msg_user_event_proto_goTypes = []any{
 	(*UserEvent_OrderCompleted)(nil),      // 5: cevt.msg.UserEvent.OrderCompleted
 	(*UserEvent_OrderPaid)(nil),           // 6: cevt.msg.UserEvent.OrderPaid
 	(*UserEvent_PaymentSuccess)(nil),      // 7: cevt.msg.UserEvent.PaymentSuccess
-	(*UserEvent_PaymentInitiated)(nil),    // 8: cevt.msg.UserEvent.PaymentInitiated
-	(*TenantMeta)(nil),                    // 9: cevt.msg.TenantMeta
-	(*timestamppb.Timestamp)(nil),         // 10: google.protobuf.Timestamp
+	(*UserEvent_Refund)(nil),              // 8: cevt.msg.UserEvent.Refund
+	(*UserEvent_PaymentInitiated)(nil),    // 9: cevt.msg.UserEvent.PaymentInitiated
+	(*TenantMeta)(nil),                    // 10: cevt.msg.TenantMeta
+	(*timestamppb.Timestamp)(nil),         // 11: google.protobuf.Timestamp
 }
 var file_cevt_msg_user_event_proto_depIdxs = []int32{
-	9,  // 0: cevt.msg.UserEvent.tenant_meta:type_name -> cevt.msg.TenantMeta
-	10, // 1: cevt.msg.UserEvent.create_timestamp:type_name -> google.protobuf.Timestamp
+	10, // 0: cevt.msg.UserEvent.tenant_meta:type_name -> cevt.msg.TenantMeta
+	11, // 1: cevt.msg.UserEvent.create_timestamp:type_name -> google.protobuf.Timestamp
 	2,  // 2: cevt.msg.UserEvent.registration_success:type_name -> cevt.msg.UserEvent.RegistrationSuccess
 	3,  // 3: cevt.msg.UserEvent.email_verified:type_name -> cevt.msg.UserEvent.EmailVerified
 	4,  // 4: cevt.msg.UserEvent.voucher_created:type_name -> cevt.msg.UserEvent.VoucherCreated
 	5,  // 5: cevt.msg.UserEvent.order_completed:type_name -> cevt.msg.UserEvent.OrderCompleted
 	7,  // 6: cevt.msg.UserEvent.payment_success:type_name -> cevt.msg.UserEvent.PaymentSuccess
-	8,  // 7: cevt.msg.UserEvent.payment_initiated:type_name -> cevt.msg.UserEvent.PaymentInitiated
+	9,  // 7: cevt.msg.UserEvent.payment_initiated:type_name -> cevt.msg.UserEvent.PaymentInitiated
 	6,  // 8: cevt.msg.UserEvent.order_paid:type_name -> cevt.msg.UserEvent.OrderPaid
-	1,  // 9: cevt.msg.UserEvent.OrderPaid.line_items:type_name -> cevt.msg.UserEvent.LineItem
-	1,  // 10: cevt.msg.UserEvent.PaymentSuccess.line_items:type_name -> cevt.msg.UserEvent.LineItem
-	1,  // 11: cevt.msg.UserEvent.PaymentInitiated.line_items:type_name -> cevt.msg.UserEvent.LineItem
-	12, // [12:12] is the sub-list for method output_type
-	12, // [12:12] is the sub-list for method input_type
-	12, // [12:12] is the sub-list for extension type_name
-	12, // [12:12] is the sub-list for extension extendee
-	0,  // [0:12] is the sub-list for field type_name
+	8,  // 9: cevt.msg.UserEvent.refund:type_name -> cevt.msg.UserEvent.Refund
+	1,  // 10: cevt.msg.UserEvent.OrderPaid.line_items:type_name -> cevt.msg.UserEvent.LineItem
+	1,  // 11: cevt.msg.UserEvent.PaymentSuccess.line_items:type_name -> cevt.msg.UserEvent.LineItem
+	1,  // 12: cevt.msg.UserEvent.Refund.line_items:type_name -> cevt.msg.UserEvent.LineItem
+	1,  // 13: cevt.msg.UserEvent.PaymentInitiated.line_items:type_name -> cevt.msg.UserEvent.LineItem
+	14, // [14:14] is the sub-list for method output_type
+	14, // [14:14] is the sub-list for method input_type
+	14, // [14:14] is the sub-list for extension type_name
+	14, // [14:14] is the sub-list for extension extendee
+	0,  // [0:14] is the sub-list for field type_name
 }
 
 func init() { file_cevt_msg_user_event_proto_init() }
@@ -1240,6 +1418,7 @@ func file_cevt_msg_user_event_proto_init() {
 		(*UserEvent_PaymentSuccess_)(nil),
 		(*UserEvent_PaymentInitiated_)(nil),
 		(*UserEvent_OrderPaid_)(nil),
+		(*UserEvent_Refund_)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -1247,7 +1426,7 @@ func file_cevt_msg_user_event_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_cevt_msg_user_event_proto_rawDesc), len(file_cevt_msg_user_event_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   9,
+			NumMessages:   10,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
