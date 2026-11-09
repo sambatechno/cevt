@@ -42,6 +42,7 @@ type UserEvent struct {
 	//	*UserEvent_PaymentInitiated_
 	//	*UserEvent_OrderPaid_
 	//	*UserEvent_Refund_
+	//	*UserEvent_AccountVerified_
 	Body          isUserEvent_Body `protobuf_oneof:"body"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -191,6 +192,15 @@ func (x *UserEvent) GetRefund() *UserEvent_Refund {
 	return nil
 }
 
+func (x *UserEvent) GetAccountVerified() *UserEvent_AccountVerified {
+	if x != nil {
+		if x, ok := x.Body.(*UserEvent_AccountVerified_); ok {
+			return x.AccountVerified
+		}
+	}
+	return nil
+}
+
 type isUserEvent_Body interface {
 	isUserEvent_Body()
 }
@@ -227,6 +237,10 @@ type UserEvent_Refund_ struct {
 	Refund *UserEvent_Refund `protobuf:"bytes,8,opt,name=refund,proto3,oneof"`
 }
 
+type UserEvent_AccountVerified_ struct {
+	AccountVerified *UserEvent_AccountVerified `protobuf:"bytes,9,opt,name=account_verified,json=accountVerified,proto3,oneof"`
+}
+
 func (*UserEvent_RegistrationSuccess_) isUserEvent_Body() {}
 
 func (*UserEvent_EmailVerified_) isUserEvent_Body() {}
@@ -242,6 +256,8 @@ func (*UserEvent_PaymentInitiated_) isUserEvent_Body() {}
 func (*UserEvent_OrderPaid_) isUserEvent_Body() {}
 
 func (*UserEvent_Refund_) isUserEvent_Body() {}
+
+func (*UserEvent_AccountVerified_) isUserEvent_Body() {}
 
 type UserEvent_LineItem struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
@@ -447,6 +463,93 @@ func (x *UserEvent_EmailVerified) GetEmail() string {
 	return ""
 }
 
+// AccountVerified fires once per new account when the customer is verified
+// (email OTP, phone OTP or social login). Used by loyalty-service to trigger
+// the welcome voucher on verification instead of on registration. See INT-492.
+type UserEvent_AccountVerified struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Method        string                 `protobuf:"bytes,1,opt,name=method,proto3" json:"method,omitempty"` // "EMAIL_OTP" | "PHONE_OTP" | "SOCIAL"
+	Email         string                 `protobuf:"bytes,2,opt,name=email,proto3" json:"email,omitempty"`
+	Phone         string                 `protobuf:"bytes,3,opt,name=phone,proto3" json:"phone,omitempty"`
+	FirstName     string                 `protobuf:"bytes,4,opt,name=first_name,json=firstName,proto3" json:"first_name,omitempty"`
+	LastName      string                 `protobuf:"bytes,5,opt,name=last_name,json=lastName,proto3" json:"last_name,omitempty"`
+	UserCreatedBy string                 `protobuf:"bytes,6,opt,name=user_created_by,json=userCreatedBy,proto3" json:"user_created_by,omitempty"` // "web" | "App"
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UserEvent_AccountVerified) Reset() {
+	*x = UserEvent_AccountVerified{}
+	mi := &file_cevt_msg_user_event_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UserEvent_AccountVerified) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UserEvent_AccountVerified) ProtoMessage() {}
+
+func (x *UserEvent_AccountVerified) ProtoReflect() protoreflect.Message {
+	mi := &file_cevt_msg_user_event_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UserEvent_AccountVerified.ProtoReflect.Descriptor instead.
+func (*UserEvent_AccountVerified) Descriptor() ([]byte, []int) {
+	return file_cevt_msg_user_event_proto_rawDescGZIP(), []int{0, 3}
+}
+
+func (x *UserEvent_AccountVerified) GetMethod() string {
+	if x != nil {
+		return x.Method
+	}
+	return ""
+}
+
+func (x *UserEvent_AccountVerified) GetEmail() string {
+	if x != nil {
+		return x.Email
+	}
+	return ""
+}
+
+func (x *UserEvent_AccountVerified) GetPhone() string {
+	if x != nil {
+		return x.Phone
+	}
+	return ""
+}
+
+func (x *UserEvent_AccountVerified) GetFirstName() string {
+	if x != nil {
+		return x.FirstName
+	}
+	return ""
+}
+
+func (x *UserEvent_AccountVerified) GetLastName() string {
+	if x != nil {
+		return x.LastName
+	}
+	return ""
+}
+
+func (x *UserEvent_AccountVerified) GetUserCreatedBy() string {
+	if x != nil {
+		return x.UserCreatedBy
+	}
+	return ""
+}
+
 type UserEvent_VoucherCreated struct {
 	state       protoimpl.MessageState `protogen:"open.v1"`
 	VoucherCode string                 `protobuf:"bytes,1,opt,name=voucher_code,json=voucherCode,proto3" json:"voucher_code,omitempty"`
@@ -463,7 +566,7 @@ type UserEvent_VoucherCreated struct {
 
 func (x *UserEvent_VoucherCreated) Reset() {
 	*x = UserEvent_VoucherCreated{}
-	mi := &file_cevt_msg_user_event_proto_msgTypes[4]
+	mi := &file_cevt_msg_user_event_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -475,7 +578,7 @@ func (x *UserEvent_VoucherCreated) String() string {
 func (*UserEvent_VoucherCreated) ProtoMessage() {}
 
 func (x *UserEvent_VoucherCreated) ProtoReflect() protoreflect.Message {
-	mi := &file_cevt_msg_user_event_proto_msgTypes[4]
+	mi := &file_cevt_msg_user_event_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -488,7 +591,7 @@ func (x *UserEvent_VoucherCreated) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserEvent_VoucherCreated.ProtoReflect.Descriptor instead.
 func (*UserEvent_VoucherCreated) Descriptor() ([]byte, []int) {
-	return file_cevt_msg_user_event_proto_rawDescGZIP(), []int{0, 3}
+	return file_cevt_msg_user_event_proto_rawDescGZIP(), []int{0, 4}
 }
 
 func (x *UserEvent_VoucherCreated) GetVoucherCode() string {
@@ -537,7 +640,7 @@ type UserEvent_OrderCompleted struct {
 
 func (x *UserEvent_OrderCompleted) Reset() {
 	*x = UserEvent_OrderCompleted{}
-	mi := &file_cevt_msg_user_event_proto_msgTypes[5]
+	mi := &file_cevt_msg_user_event_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -549,7 +652,7 @@ func (x *UserEvent_OrderCompleted) String() string {
 func (*UserEvent_OrderCompleted) ProtoMessage() {}
 
 func (x *UserEvent_OrderCompleted) ProtoReflect() protoreflect.Message {
-	mi := &file_cevt_msg_user_event_proto_msgTypes[5]
+	mi := &file_cevt_msg_user_event_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -562,7 +665,7 @@ func (x *UserEvent_OrderCompleted) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserEvent_OrderCompleted.ProtoReflect.Descriptor instead.
 func (*UserEvent_OrderCompleted) Descriptor() ([]byte, []int) {
-	return file_cevt_msg_user_event_proto_rawDescGZIP(), []int{0, 4}
+	return file_cevt_msg_user_event_proto_rawDescGZIP(), []int{0, 5}
 }
 
 func (x *UserEvent_OrderCompleted) GetAmount() float64 {
@@ -658,7 +761,7 @@ type UserEvent_OrderPaid struct {
 
 func (x *UserEvent_OrderPaid) Reset() {
 	*x = UserEvent_OrderPaid{}
-	mi := &file_cevt_msg_user_event_proto_msgTypes[6]
+	mi := &file_cevt_msg_user_event_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -670,7 +773,7 @@ func (x *UserEvent_OrderPaid) String() string {
 func (*UserEvent_OrderPaid) ProtoMessage() {}
 
 func (x *UserEvent_OrderPaid) ProtoReflect() protoreflect.Message {
-	mi := &file_cevt_msg_user_event_proto_msgTypes[6]
+	mi := &file_cevt_msg_user_event_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -683,7 +786,7 @@ func (x *UserEvent_OrderPaid) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserEvent_OrderPaid.ProtoReflect.Descriptor instead.
 func (*UserEvent_OrderPaid) Descriptor() ([]byte, []int) {
-	return file_cevt_msg_user_event_proto_rawDescGZIP(), []int{0, 5}
+	return file_cevt_msg_user_event_proto_rawDescGZIP(), []int{0, 6}
 }
 
 func (x *UserEvent_OrderPaid) GetAmount() float64 {
@@ -815,7 +918,7 @@ type UserEvent_PaymentSuccess struct {
 
 func (x *UserEvent_PaymentSuccess) Reset() {
 	*x = UserEvent_PaymentSuccess{}
-	mi := &file_cevt_msg_user_event_proto_msgTypes[7]
+	mi := &file_cevt_msg_user_event_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -827,7 +930,7 @@ func (x *UserEvent_PaymentSuccess) String() string {
 func (*UserEvent_PaymentSuccess) ProtoMessage() {}
 
 func (x *UserEvent_PaymentSuccess) ProtoReflect() protoreflect.Message {
-	mi := &file_cevt_msg_user_event_proto_msgTypes[7]
+	mi := &file_cevt_msg_user_event_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -840,7 +943,7 @@ func (x *UserEvent_PaymentSuccess) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserEvent_PaymentSuccess.ProtoReflect.Descriptor instead.
 func (*UserEvent_PaymentSuccess) Descriptor() ([]byte, []int) {
-	return file_cevt_msg_user_event_proto_rawDescGZIP(), []int{0, 6}
+	return file_cevt_msg_user_event_proto_rawDescGZIP(), []int{0, 7}
 }
 
 func (x *UserEvent_PaymentSuccess) GetAmount() float64 {
@@ -976,7 +1079,7 @@ type UserEvent_Refund struct {
 
 func (x *UserEvent_Refund) Reset() {
 	*x = UserEvent_Refund{}
-	mi := &file_cevt_msg_user_event_proto_msgTypes[8]
+	mi := &file_cevt_msg_user_event_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -988,7 +1091,7 @@ func (x *UserEvent_Refund) String() string {
 func (*UserEvent_Refund) ProtoMessage() {}
 
 func (x *UserEvent_Refund) ProtoReflect() protoreflect.Message {
-	mi := &file_cevt_msg_user_event_proto_msgTypes[8]
+	mi := &file_cevt_msg_user_event_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1001,7 +1104,7 @@ func (x *UserEvent_Refund) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserEvent_Refund.ProtoReflect.Descriptor instead.
 func (*UserEvent_Refund) Descriptor() ([]byte, []int) {
-	return file_cevt_msg_user_event_proto_rawDescGZIP(), []int{0, 7}
+	return file_cevt_msg_user_event_proto_rawDescGZIP(), []int{0, 8}
 }
 
 func (x *UserEvent_Refund) GetAmount() float64 {
@@ -1114,7 +1217,7 @@ type UserEvent_PaymentInitiated struct {
 
 func (x *UserEvent_PaymentInitiated) Reset() {
 	*x = UserEvent_PaymentInitiated{}
-	mi := &file_cevt_msg_user_event_proto_msgTypes[9]
+	mi := &file_cevt_msg_user_event_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1126,7 +1229,7 @@ func (x *UserEvent_PaymentInitiated) String() string {
 func (*UserEvent_PaymentInitiated) ProtoMessage() {}
 
 func (x *UserEvent_PaymentInitiated) ProtoReflect() protoreflect.Message {
-	mi := &file_cevt_msg_user_event_proto_msgTypes[9]
+	mi := &file_cevt_msg_user_event_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1139,7 +1242,7 @@ func (x *UserEvent_PaymentInitiated) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserEvent_PaymentInitiated.ProtoReflect.Descriptor instead.
 func (*UserEvent_PaymentInitiated) Descriptor() ([]byte, []int) {
-	return file_cevt_msg_user_event_proto_rawDescGZIP(), []int{0, 8}
+	return file_cevt_msg_user_event_proto_rawDescGZIP(), []int{0, 9}
 }
 
 func (x *UserEvent_PaymentInitiated) GetInvoiceNumber() string {
@@ -1223,7 +1326,7 @@ var File_cevt_msg_user_event_proto protoreflect.FileDescriptor
 
 const file_cevt_msg_user_event_proto_rawDesc = "" +
 	"\n" +
-	"\x19cevt/msg/user_event.proto\x12\bcevt.msg\x1a\x1acevt/msg/tenant_meta.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xde\x1c\n" +
+	"\x19cevt/msg/user_event.proto\x12\bcevt.msg\x1a\x1acevt/msg/tenant_meta.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xec\x1e\n" +
 	"\tUserEvent\x12\x1b\n" +
 	"\tuser_uuid\x18\x1e \x01(\tR\buserUuid\x12\x17\n" +
 	"\auser_id\x18\x1f \x01(\x03R\x06userId\x125\n" +
@@ -1239,7 +1342,8 @@ const file_cevt_msg_user_event_proto_rawDesc = "" +
 	"\x11payment_initiated\x18\x06 \x01(\v2$.cevt.msg.UserEvent.PaymentInitiatedH\x00R\x10paymentInitiated\x12>\n" +
 	"\n" +
 	"order_paid\x18\a \x01(\v2\x1d.cevt.msg.UserEvent.OrderPaidH\x00R\torderPaid\x124\n" +
-	"\x06refund\x18\b \x01(\v2\x1a.cevt.msg.UserEvent.RefundH\x00R\x06refund\x1a\x97\x01\n" +
+	"\x06refund\x18\b \x01(\v2\x1a.cevt.msg.UserEvent.RefundH\x00R\x06refund\x12P\n" +
+	"\x10account_verified\x18\t \x01(\v2#.cevt.msg.UserEvent.AccountVerifiedH\x00R\x0faccountVerified\x1a\x97\x01\n" +
 	"\bLineItem\x12\x17\n" +
 	"\aitem_id\x18\x01 \x01(\tR\x06itemId\x12\x1b\n" +
 	"\titem_name\x18\x02 \x01(\tR\bitemName\x12\x1a\n" +
@@ -1255,7 +1359,15 @@ const file_cevt_msg_user_event_proto_rawDesc = "" +
 	"\x05phone\x18\x05 \x01(\tR\x05phone\x12&\n" +
 	"\x0fuser_created_by\x18\x06 \x01(\tR\ruserCreatedBy\x1a%\n" +
 	"\rEmailVerified\x12\x14\n" +
-	"\x05email\x18\x01 \x01(\tR\x05email\x1a\x94\x01\n" +
+	"\x05email\x18\x01 \x01(\tR\x05email\x1a\xb9\x01\n" +
+	"\x0fAccountVerified\x12\x16\n" +
+	"\x06method\x18\x01 \x01(\tR\x06method\x12\x14\n" +
+	"\x05email\x18\x02 \x01(\tR\x05email\x12\x14\n" +
+	"\x05phone\x18\x03 \x01(\tR\x05phone\x12\x1d\n" +
+	"\n" +
+	"first_name\x18\x04 \x01(\tR\tfirstName\x12\x1b\n" +
+	"\tlast_name\x18\x05 \x01(\tR\blastName\x12&\n" +
+	"\x0fuser_created_by\x18\x06 \x01(\tR\ruserCreatedBy\x1a\x94\x01\n" +
 	"\x0eVoucherCreated\x12!\n" +
 	"\fvoucher_code\x18\x01 \x01(\tR\vvoucherCode\x12!\n" +
 	"\fpromotion_id\x18\x04 \x01(\tR\vpromotionId\x12\x1d\n" +
@@ -1367,41 +1479,43 @@ func file_cevt_msg_user_event_proto_rawDescGZIP() []byte {
 	return file_cevt_msg_user_event_proto_rawDescData
 }
 
-var file_cevt_msg_user_event_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
+var file_cevt_msg_user_event_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
 var file_cevt_msg_user_event_proto_goTypes = []any{
 	(*UserEvent)(nil),                     // 0: cevt.msg.UserEvent
 	(*UserEvent_LineItem)(nil),            // 1: cevt.msg.UserEvent.LineItem
 	(*UserEvent_RegistrationSuccess)(nil), // 2: cevt.msg.UserEvent.RegistrationSuccess
 	(*UserEvent_EmailVerified)(nil),       // 3: cevt.msg.UserEvent.EmailVerified
-	(*UserEvent_VoucherCreated)(nil),      // 4: cevt.msg.UserEvent.VoucherCreated
-	(*UserEvent_OrderCompleted)(nil),      // 5: cevt.msg.UserEvent.OrderCompleted
-	(*UserEvent_OrderPaid)(nil),           // 6: cevt.msg.UserEvent.OrderPaid
-	(*UserEvent_PaymentSuccess)(nil),      // 7: cevt.msg.UserEvent.PaymentSuccess
-	(*UserEvent_Refund)(nil),              // 8: cevt.msg.UserEvent.Refund
-	(*UserEvent_PaymentInitiated)(nil),    // 9: cevt.msg.UserEvent.PaymentInitiated
-	(*TenantMeta)(nil),                    // 10: cevt.msg.TenantMeta
-	(*timestamppb.Timestamp)(nil),         // 11: google.protobuf.Timestamp
+	(*UserEvent_AccountVerified)(nil),     // 4: cevt.msg.UserEvent.AccountVerified
+	(*UserEvent_VoucherCreated)(nil),      // 5: cevt.msg.UserEvent.VoucherCreated
+	(*UserEvent_OrderCompleted)(nil),      // 6: cevt.msg.UserEvent.OrderCompleted
+	(*UserEvent_OrderPaid)(nil),           // 7: cevt.msg.UserEvent.OrderPaid
+	(*UserEvent_PaymentSuccess)(nil),      // 8: cevt.msg.UserEvent.PaymentSuccess
+	(*UserEvent_Refund)(nil),              // 9: cevt.msg.UserEvent.Refund
+	(*UserEvent_PaymentInitiated)(nil),    // 10: cevt.msg.UserEvent.PaymentInitiated
+	(*TenantMeta)(nil),                    // 11: cevt.msg.TenantMeta
+	(*timestamppb.Timestamp)(nil),         // 12: google.protobuf.Timestamp
 }
 var file_cevt_msg_user_event_proto_depIdxs = []int32{
-	10, // 0: cevt.msg.UserEvent.tenant_meta:type_name -> cevt.msg.TenantMeta
-	11, // 1: cevt.msg.UserEvent.create_timestamp:type_name -> google.protobuf.Timestamp
+	11, // 0: cevt.msg.UserEvent.tenant_meta:type_name -> cevt.msg.TenantMeta
+	12, // 1: cevt.msg.UserEvent.create_timestamp:type_name -> google.protobuf.Timestamp
 	2,  // 2: cevt.msg.UserEvent.registration_success:type_name -> cevt.msg.UserEvent.RegistrationSuccess
 	3,  // 3: cevt.msg.UserEvent.email_verified:type_name -> cevt.msg.UserEvent.EmailVerified
-	4,  // 4: cevt.msg.UserEvent.voucher_created:type_name -> cevt.msg.UserEvent.VoucherCreated
-	5,  // 5: cevt.msg.UserEvent.order_completed:type_name -> cevt.msg.UserEvent.OrderCompleted
-	7,  // 6: cevt.msg.UserEvent.payment_success:type_name -> cevt.msg.UserEvent.PaymentSuccess
-	9,  // 7: cevt.msg.UserEvent.payment_initiated:type_name -> cevt.msg.UserEvent.PaymentInitiated
-	6,  // 8: cevt.msg.UserEvent.order_paid:type_name -> cevt.msg.UserEvent.OrderPaid
-	8,  // 9: cevt.msg.UserEvent.refund:type_name -> cevt.msg.UserEvent.Refund
-	1,  // 10: cevt.msg.UserEvent.OrderPaid.line_items:type_name -> cevt.msg.UserEvent.LineItem
-	1,  // 11: cevt.msg.UserEvent.PaymentSuccess.line_items:type_name -> cevt.msg.UserEvent.LineItem
-	1,  // 12: cevt.msg.UserEvent.Refund.line_items:type_name -> cevt.msg.UserEvent.LineItem
-	1,  // 13: cevt.msg.UserEvent.PaymentInitiated.line_items:type_name -> cevt.msg.UserEvent.LineItem
-	14, // [14:14] is the sub-list for method output_type
-	14, // [14:14] is the sub-list for method input_type
-	14, // [14:14] is the sub-list for extension type_name
-	14, // [14:14] is the sub-list for extension extendee
-	0,  // [0:14] is the sub-list for field type_name
+	5,  // 4: cevt.msg.UserEvent.voucher_created:type_name -> cevt.msg.UserEvent.VoucherCreated
+	6,  // 5: cevt.msg.UserEvent.order_completed:type_name -> cevt.msg.UserEvent.OrderCompleted
+	8,  // 6: cevt.msg.UserEvent.payment_success:type_name -> cevt.msg.UserEvent.PaymentSuccess
+	10, // 7: cevt.msg.UserEvent.payment_initiated:type_name -> cevt.msg.UserEvent.PaymentInitiated
+	7,  // 8: cevt.msg.UserEvent.order_paid:type_name -> cevt.msg.UserEvent.OrderPaid
+	9,  // 9: cevt.msg.UserEvent.refund:type_name -> cevt.msg.UserEvent.Refund
+	4,  // 10: cevt.msg.UserEvent.account_verified:type_name -> cevt.msg.UserEvent.AccountVerified
+	1,  // 11: cevt.msg.UserEvent.OrderPaid.line_items:type_name -> cevt.msg.UserEvent.LineItem
+	1,  // 12: cevt.msg.UserEvent.PaymentSuccess.line_items:type_name -> cevt.msg.UserEvent.LineItem
+	1,  // 13: cevt.msg.UserEvent.Refund.line_items:type_name -> cevt.msg.UserEvent.LineItem
+	1,  // 14: cevt.msg.UserEvent.PaymentInitiated.line_items:type_name -> cevt.msg.UserEvent.LineItem
+	15, // [15:15] is the sub-list for method output_type
+	15, // [15:15] is the sub-list for method input_type
+	15, // [15:15] is the sub-list for extension type_name
+	15, // [15:15] is the sub-list for extension extendee
+	0,  // [0:15] is the sub-list for field type_name
 }
 
 func init() { file_cevt_msg_user_event_proto_init() }
@@ -1419,6 +1533,7 @@ func file_cevt_msg_user_event_proto_init() {
 		(*UserEvent_PaymentInitiated_)(nil),
 		(*UserEvent_OrderPaid_)(nil),
 		(*UserEvent_Refund_)(nil),
+		(*UserEvent_AccountVerified_)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -1426,7 +1541,7 @@ func file_cevt_msg_user_event_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_cevt_msg_user_event_proto_rawDesc), len(file_cevt_msg_user_event_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   10,
+			NumMessages:   11,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
