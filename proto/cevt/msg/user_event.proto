@@ -39,6 +39,18 @@ message UserEvent {
     string email = 1;
   }
 
+  // AccountVerified fires once per new account when the customer is verified
+  // (email OTP, phone OTP or social login). Used by loyalty-service to trigger
+  // the welcome voucher on verification instead of on registration. See INT-492.
+  message AccountVerified {
+    string method = 1; // "EMAIL_OTP" | "PHONE_OTP" | "SOCIAL"
+    string email = 2;
+    string phone = 3;
+    string first_name = 4;
+    string last_name = 5;
+    string user_created_by = 6; // "web" | "App"
+  }
+
   message VoucherCreated {
     string voucher_code = 1;
     // string voucher_type = 2;
@@ -139,5 +151,6 @@ message UserEvent {
     PaymentInitiated payment_initiated = 6;
     OrderPaid order_paid = 7;
     Refund refund = 8;
+    AccountVerified account_verified = 9;
   }
 }
